@@ -1,5 +1,4 @@
 import Image from "next/image";
-import istambul from "@/assets/planYourPerfectTrip/istambul.svg";
 import { trips } from "@/data/trips";
 
 export default function PlanYourPerfectTrip() {
