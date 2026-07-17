@@ -13,11 +13,11 @@ export default function RecuperarSenha() {
   };
 
   return (
-    <div className="flex flex-col w-3/4 gap-3">
-      <Link href="/entrar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition">
+    <div className="flex flex-col w-full gap-3">
+      <Link href="/entrar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition w-fit">
         <ChevronLeft className="h-4 w-4" /> Voltar para o login
       </Link>
-      <h1 className="text-3xl font-semibold">Esqueceste a password?</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold">Esqueceste a password?</h1>
       <p className="text-sm text-zinc-500">
         Não te preocupes. Introduz o teu email e enviaremos um código de recuperação.
       </p>

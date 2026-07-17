@@ -11,8 +11,8 @@ export default function NovaSenha() {
   };
 
   return (
-    <div className="flex flex-col w-3/4 gap-3">
-      <h1 className="text-3xl font-semibold">Definir nova password</h1>
+    <div className="flex flex-col w-full gap-3">
+      <h1 className="text-2xl sm:text-3xl font-semibold">Definir nova password</h1>
       <p className="text-sm text-zinc-500">
         A tua password anterior foi redefinida. Define uma nova password para a tua conta.
       </p>

@@ -5,19 +5,19 @@ import SocialMedia from "@/components/SocialMedia";
 
 export default function Entrar() {
   return (
-    <div className="flex flex-col w-3/4 gap-3">
-      <h1 className="text-3xl font-semibold">Entrar</h1>
+    <div className="flex flex-col w-full gap-3">
+      <h1 className="text-2xl sm:text-3xl font-semibold">Entrar</h1>
       <p className="text-sm text-zinc-500">Acede à tua conta</p>
       <form className="flex flex-col gap-4 w-full py-6">
         <div className="flex flex-col gap-4 w-full">
           <FloatingLabelInput label="Email" name="email" type="email" required />
           <FloatingLabelPasswordInput label="Password" name="password" required />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <div className="flex items-center">
               <input type="checkbox" className="mr-2" />
               <label className="text-xs">Lembrar-me</label>
             </div>
-            <Link href="/recuperar-senha" className="text-xs text-mint hover:underline">
+            <Link href="/recuperar-senha" className="text-xs text-mint hover:underline shrink-0">
               Esqueci a password
             </Link>
           </div>

@@ -14,22 +14,22 @@ const categorias = [
 
 export default function Categorias() {
   return (
-    <section className="w-full bg-gray-50 py-20">
-      <div className="max-w-7xl mx-auto px-10">
-        <div className="flex items-end justify-between mb-10">
+    <section className="w-full bg-gray-50 py-12 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10">
+        <div className="flex items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
             <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-2">Navega por categoria</p>
-            <h2 className="text-2xl font-bold">Tipo de imóvel</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Tipo de imóvel</h2>
           </div>
-          <Link href="/pesquisa" className="text-sm font-semibold text-zinc-500 hover:text-black transition">
+          <Link href="/pesquisa" className="text-sm font-semibold text-zinc-500 hover:text-black transition shrink-0">
             Ver todos →
           </Link>
         </div>
 
-        <div className="grid grid-cols-4 gap-4 lg:grid-cols-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
           {categorias.map(({ nome, icone: Icon, count, href, bg, cor }) => (
             <Link key={nome} href={href}>
-              <div className="bg-white rounded-2xl p-5 flex flex-col items-center gap-3 text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 border border-gray-100 cursor-pointer group">
+              <div className="bg-white rounded-2xl p-4 sm:p-5 flex flex-col items-center gap-3 text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 border border-gray-100 cursor-pointer group">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${bg} group-hover:scale-110 transition-transform duration-200`}>
                   <Icon className={`size-5 ${cor}`} />
                 </div>

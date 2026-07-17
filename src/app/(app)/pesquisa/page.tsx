@@ -100,34 +100,37 @@ export default function Pesquisa() {
     </button>
   );
 
+  const panel =
+    "absolute top-full left-0 right-0 sm:right-auto mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 w-auto sm:w-52 max-h-[70vh] overflow-y-auto";
+
   return (
-    <div className="max-w-7xl mx-auto w-full px-10 py-8 pb-16">
+    <div className="max-w-7xl mx-auto w-full px-4 sm:px-10 py-6 sm:py-8 pb-16">
 
       {/* Cabeçalho */}
-      <div className="flex items-center justify-between mb-5">
+      <div className="flex items-start sm:items-center justify-between mb-5 gap-3">
         <div>
-          <h1 className="text-2xl font-semibold">Pesquisar imóveis</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold">Pesquisar imóveis</h1>
           <p className="text-sm text-zinc-500 mt-0.5">{resultados.length} imóveis encontrados</p>
         </div>
         {temFiltros && (
           <button
             onClick={limpar}
-            className="flex items-center gap-1.5 text-xs text-zinc-500 border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition hover:cursor-pointer"
+            className="flex items-center gap-1.5 text-xs text-zinc-500 border border-gray-200 px-3 py-1.5 rounded-lg hover:bg-gray-50 transition hover:cursor-pointer shrink-0"
           >
-            <X className="size-3" /> Limpar filtros
+            <X className="size-3" /> <span className="hidden sm:inline">Limpar filtros</span><span className="sm:hidden">Limpar</span>
           </button>
         )}
       </div>
 
       {/* Barra de filtros horizontal */}
-      <div ref={barRef} className="relative mb-8">
+      <div ref={barRef} className="relative mb-6 sm:mb-8">
         <div className="flex items-center gap-2 flex-wrap">
           {btn("cidade", labelCidade, !!cidade)}
           {btn("tipo", labelTipo, tiposSel.length > 0)}
           {btn("quartos", labelQuartos, !!quartos)}
           {btn("preco", labelPreco, !!(precoMin || precoMax))}
 
-          <div className="w-px h-5 bg-gray-200 mx-1" />
+          <div className="hidden sm:block w-px h-5 bg-gray-200 mx-1" />
 
           <button
             onClick={() => toggle("mais")}
@@ -143,7 +146,7 @@ export default function Pesquisa() {
 
         {/* Dropdown — Cidade */}
         {openPanel === "cidade" && (
-          <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 w-52">
+          <div className={panel}>
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Cidade</p>
             <div className="flex flex-col gap-1.5">
               {cidades.map((c) => {
@@ -167,8 +170,7 @@ export default function Pesquisa() {
 
         {/* Dropdown — Tipo */}
         {openPanel === "tipo" && (
-          <div className="absolute top-full left-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 w-56"
-               style={{ left: "calc(1 * (6rem + 0.5rem))" }}>
+          <div className={`${panel} sm:w-56`}>
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Tipo de imóvel</p>
             <div className="flex flex-col gap-1.5">
               {TIPOS.map((t) => (
@@ -197,8 +199,7 @@ export default function Pesquisa() {
 
         {/* Dropdown — Quartos */}
         {openPanel === "quartos" && (
-          <div className="absolute top-full mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 w-48"
-               style={{ left: "calc(2 * (6rem + 0.5rem) + 5.5rem)" }}>
+          <div className={`${panel} sm:w-48`}>
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Quartos</p>
             <div className="flex gap-2 flex-wrap">
               {QUARTOS_OP.map((q) => (
@@ -218,8 +219,7 @@ export default function Pesquisa() {
 
         {/* Dropdown — Preço */}
         {openPanel === "preco" && (
-          <div className="absolute top-full mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-50 w-64"
-               style={{ left: "calc(3 * (6rem + 0.5rem) + 8rem)" }}>
+          <div className={`${panel} sm:w-64`}>
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-3">Preço (MZN/mês)</p>
             <div className="flex gap-2">
               <div className="flex-1">
@@ -248,7 +248,7 @@ export default function Pesquisa() {
 
         {/* Dropdown — Mais filtros */}
         {openPanel === "mais" && (
-          <div className="absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-5 z-50 w-[480px]">
+          <div className="absolute top-full left-0 right-0 sm:left-auto sm:right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-5 z-50 w-auto sm:w-[480px] max-h-[70vh] overflow-y-auto">
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-4">Filtros avançados</p>
 
             <div className="flex flex-col gap-5">
@@ -278,7 +278,7 @@ export default function Pesquisa() {
                   placeholder="Ex: 50"
                   value={areaMin}
                   onChange={(e) => setAreaMin(e.target.value)}
-                  className="w-40 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-black transition"
+                  className="w-full sm:w-40 border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-black transition"
                 />
               </div>
 
@@ -306,15 +306,15 @@ export default function Pesquisa() {
         )}
       </div>
 
-      {/* Grelha de resultados — largura total */}
+      {/* Grelha de resultados */}
       {resultados.length > 0 ? (
-        <div className="grid grid-cols-3 gap-5 xl:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {resultados.map((imovel) => (
             <ImovelCard key={imovel.id} imovel={imovel} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-24 gap-4">
+        <div className="flex flex-col items-center justify-center py-16 sm:py-24 gap-4 px-4 text-center">
           <Search className="size-14 text-zinc-200" />
           <p className="text-zinc-500 font-medium text-lg">Nenhum imóvel encontrado</p>
           <p className="text-sm text-zinc-400">Tenta ajustar os filtros acima</p>

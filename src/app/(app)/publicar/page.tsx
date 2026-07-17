@@ -199,13 +199,13 @@ export default function Publicar() {
   /* ── Ecrã de sucesso ── */
   if (publicado) {
     return (
-      <div className="max-w-7xl mx-auto w-full flex flex-col items-center py-20 px-10">
+      <div className="max-w-7xl mx-auto w-full flex flex-col items-center py-12 sm:py-20 px-4 sm:px-10">
         <div className="max-w-md w-full flex flex-col items-center gap-6 text-center">
           <div className="bg-mint/10 rounded-full p-6">
             <CheckCircle2 className="size-16 text-mint" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Anúncio publicado!</h1>
+            <h1 className="text-xl sm:text-2xl font-bold">Anúncio publicado!</h1>
             <p className="text-sm text-zinc-500 mt-2">
               <strong>{d.titulo || "O teu imóvel"}</strong> já está visível para todos.
               Serás notificado quando alguém desbloquear o teu contacto.
@@ -225,28 +225,36 @@ export default function Publicar() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto w-full px-10 py-8 pb-16">
-      <div className="w-full flex flex-col gap-6">
+    <div className="max-w-7xl mx-auto w-full px-4 sm:px-10 py-6 sm:py-8 pb-16">
+      <div className="w-full flex flex-col gap-5 sm:gap-6">
 
         {/* Título */}
         <div>
-          <h1 className="text-2xl font-semibold">Publicar imóvel</h1>
+          <h1 className="text-xl sm:text-2xl font-semibold">Publicar imóvel</h1>
           <p className="text-sm text-zinc-500 mt-1">Gratuito · Sem comissões de publicação</p>
         </div>
 
         {/* Stepper */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div className="flex items-center justify-between mb-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5">
+          <div className="flex items-start sm:items-center justify-between mb-4 gap-3">
             <p className="text-sm font-semibold">{TITULOS[passo - 1]}</p>
-            <p className="text-xs text-zinc-400">Passo {passo} de {TOTAL}</p>
+            <p className="text-xs text-zinc-400 shrink-0">Passo {passo} de {TOTAL}</p>
           </div>
-          <div className="flex items-center">
+          {/* Mobile: barra de progresso */}
+          <div className="sm:hidden h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-mint rounded-full transition-all duration-300"
+              style={{ width: `${(passo / TOTAL) * 100}%` }}
+            />
+          </div>
+          {/* Desktop: círculos */}
+          <div className="hidden sm:flex items-center justify-between">
             {Array.from({ length: TOTAL }).map((_, i) => {
               const n = i + 1;
               const done = passo > n;
               const cur = passo === n;
               return (
-                <div key={n} className="flex items-center last:flex-none">
+                <div key={n} className="flex items-center flex-1 last:flex-none">
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
                     done ? "bg-mint text-black" : cur ? "bg-black text-white" : "bg-gray-100 text-zinc-400"
                   }`}>
@@ -262,7 +270,7 @@ export default function Publicar() {
         </div>
 
         {/* Conteúdo do passo */}
-        <div className="bg-white shadow-sm rounded-2xl p-8 border border-gray-100 flex flex-col gap-6">
+        <div className="bg-white shadow-sm rounded-2xl p-4 sm:p-8 border border-gray-100 flex flex-col gap-5 sm:gap-6">
 
           {/* ── Passo 1: Informações Básicas ── */}
           {passo === 1 && (
@@ -280,7 +288,7 @@ export default function Publicar() {
 
               <div>
                 <SLabel>Tipo de imóvel <span className="text-mint">*</span></SLabel>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {TIPOS_IMOVEL.map((t) => (
                     <CardSelect key={t} label={t} active={d.tipoImovel === t} onClick={() => set("tipoImovel", t)} />
                   ))}
@@ -313,7 +321,7 @@ export default function Publicar() {
                 <p className="text-xs text-zinc-400 mt-1">Apenas o bairro e cidade serão visíveis publicamente</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FSelect label="Província" req value={d.provincia} onChange={(v) => set("provincia", v)}
                   options={PROVINCIAS.map((p) => ({ value: p, label: p }))} />
                 <FInput label="Cidade" req value={d.cidade} onChange={(v) => set("cidade", v)} />
@@ -340,15 +348,15 @@ export default function Publicar() {
             <>
               <h2 className="font-semibold text-lg -mb-2">Preço</h2>
 
-              <div className="grid grid-cols-3 gap-4">
-                <div className="col-span-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
                   <FInput label="Valor mensal" req type="number" value={d.preco} onChange={(v) => set("preco", v)} placeholder="0" />
                 </div>
                 <FSelect label="Moeda" value={d.moeda} onChange={(v) => set("moeda", v)}
                   options={[{ value: "MZN", label: "MZN" }, { value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }]} />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FInput label="Valor da caução" type="number" value={d.caucao} onChange={(v) => set("caucao", v)} />
                 <FSelect label="Meses de caução" value={d.mesesCaucao} onChange={(v) => set("mesesCaucao", v)}
                   options={["0", "1", "2", "3", "6"].map((m) => ({ value: m, label: `${m} ${m === "1" ? "mês" : "meses"}` }))} />
@@ -373,7 +381,7 @@ export default function Publicar() {
           {passo === 4 && (
             <>
               <h2 className="font-semibold text-lg -mb-2">Características</h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {([
                   { label: "Área total (m²)", req: true, key: "area" },
                   { label: "Quartos", req: true, key: "quartos" },
@@ -399,7 +407,7 @@ export default function Publicar() {
                 <h2 className="font-semibold text-lg">Comodidades</h2>
                 <p className="text-sm text-zinc-400 mt-1">Selecciona tudo o que o imóvel tem disponível</p>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {COMODIDADES.map((c) => (
                   <ChipCheck key={c} label={c} checked={d.comodidades.includes(c)} onClick={() => toggleArr("comodidades", c)} />
                 ))}
@@ -418,9 +426,9 @@ export default function Publicar() {
                 <p className="text-sm text-zinc-400 mt-1">Mínimo 3 fotos <span className="text-mint">*</span> · Máximo 20 fotos</p>
               </div>
 
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-12 flex flex-col items-center gap-4 text-center hover:border-mint transition hover:cursor-pointer">
-                <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
-                  <Camera className="size-8 text-zinc-300" />
+              <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-12 flex flex-col items-center gap-4 text-center hover:border-mint transition hover:cursor-pointer">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-100 flex items-center justify-center">
+                  <Camera className="size-7 sm:size-8 text-zinc-300" />
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-zinc-600">Adicionar fotografias</p>
@@ -514,7 +522,7 @@ export default function Publicar() {
             <>
               <h2 className="font-semibold text-lg -mb-2">Contacto e Preferências</h2>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FInput label="Nome" req value={d.nomeContacto} onChange={(v) => set("nomeContacto", v)} />
                 <FInput label="Telefone" req type="tel" value={d.telefone} onChange={(v) => set("telefone", v)} placeholder="+258 8X XXX XXXX" />
                 <FInput label="WhatsApp (opcional)" type="tel" value={d.whatsapp} onChange={(v) => set("whatsapp", v)} placeholder="+258 8X XXX XXXX" />
@@ -611,11 +619,11 @@ export default function Publicar() {
                   <div className="bg-gray-50 px-4 py-2.5 border-b border-gray-100">
                     <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">{sec.t}</p>
                   </div>
-                  <div className="grid grid-cols-2 gap-x-6 gap-y-3 p-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 p-4">
                     {sec.rows.map(([l, v]) => (
                       <div key={l}>
                         <p className="text-xs text-zinc-400">{l}</p>
-                        <p className={`text-sm font-medium mt-0.5 ${!v ? "text-mint" : "text-black"}`}>
+                        <p className={`text-sm font-medium mt-0.5 break-words ${!v ? "text-mint" : "text-black"}`}>
                           {v || "Não preenchido"}
                         </p>
                       </div>
@@ -650,22 +658,22 @@ export default function Publicar() {
         </div>
 
         {/* Navegação */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {passo > 1 ? (
             <button
               type="button"
               onClick={() => setPasso((p) => p - 1)}
-              className="flex items-center gap-2 text-sm font-medium border border-gray-200 px-5 py-2.5 rounded-xl hover:bg-gray-50 transition hover:cursor-pointer"
+              className="flex items-center justify-center gap-2 text-sm font-medium border border-gray-200 px-5 py-2.5 rounded-xl hover:bg-gray-50 transition hover:cursor-pointer"
             >
               <ChevronLeft className="size-4" /> Anterior
             </button>
-          ) : <div />}
+          ) : <div className="hidden sm:block" />}
 
           {passo < TOTAL ? (
             <button
               type="button"
               onClick={() => setPasso((p) => p + 1)}
-              className="flex items-center gap-2 bg-mint text-black text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-mint/80 transition hover:cursor-pointer"
+              className="flex items-center justify-center gap-2 bg-mint text-black text-sm font-semibold px-6 py-2.5 rounded-xl hover:bg-mint/80 transition hover:cursor-pointer"
             >
               Seguinte <ChevronRight className="size-4" />
             </button>
@@ -675,7 +683,7 @@ export default function Publicar() {
               onClick={() => setPublicado(true)}
               className="bg-black text-white text-sm font-semibold px-8 py-2.5 rounded-xl hover:bg-zinc-800 transition hover:cursor-pointer"
             >
-              🚀 Publicar anúncio
+              Publicar anúncio
             </button>
           )}
         </div>

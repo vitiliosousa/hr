@@ -1,5 +1,4 @@
 import Card from "@/components/account/Card";
-import { CirclePlus } from "lucide-react";
 import AddNewCard from "@/components/account/AddNewCard";
 
 export default function PaymentTab() {

@@ -32,7 +32,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="min-h-screen w-full font-montserrat flex">
       {/* Coluna esquerda — formulário */}
-      <div className="w-1/2 flex flex-col px-16 py-10 bg-white">
+      <div className="w-full lg:w-1/2 flex flex-col px-4 sm:px-10 lg:px-16 py-8 sm:py-10 bg-white min-h-screen">
         <Link
           href="/"
           className="flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-black transition w-fit"
@@ -41,13 +41,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <span className="text-blackish font-bold">CasaJá</span>
         </Link>
 
-        <div className="flex-1 flex items-center justify-center">
-          {children}
+        <div className="flex-1 flex items-center justify-center py-8 sm:py-10">
+          <div className="w-full max-w-md">{children}</div>
         </div>
       </div>
 
-      {/* Coluna direita — slideshow de imóveis */}
-      <div className="w-1/2 relative overflow-hidden bg-zinc-900">
+      {/* Coluna direita — slideshow (só desktop) */}
+      <div className="hidden lg:block w-1/2 relative overflow-hidden bg-zinc-900 sticky top-0 h-screen">
         {slides.map((s, i) => (
           <div
             key={i}
@@ -56,10 +56,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           />
         ))}
 
-        {/* Overlay gradiente */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
 
-        {/* Texto do slide */}
         <div className="absolute bottom-16 left-10 right-10">
           <div className="flex items-center gap-1.5 text-white/60 text-xs mb-2">
             <MapPin className="size-3" />
@@ -68,12 +66,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <h2 className="text-white text-2xl font-bold leading-snug">{slides[idx].titulo}</h2>
         </div>
 
-        {/* Dots */}
         <div className="absolute bottom-8 left-10 flex gap-2">
           {slides.map((_, i) => (
             <button
               key={i}
+              type="button"
               onClick={() => setIdx(i)}
+              aria-label={`Slide ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 hover:cursor-pointer ${
                 i === idx ? "bg-mint w-6" : "bg-white/40 w-1.5"
               }`}

@@ -7,20 +7,20 @@ const stats = [
 
 export default function Estatisticas() {
   return (
-    <section className="w-full bg-zinc-900 py-20">
-      <div className="max-w-7xl mx-auto px-10">
-        <div className="text-center mb-14">
+    <section className="w-full bg-zinc-900 py-12 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10">
+        <div className="text-center mb-10 sm:mb-14">
           <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-2">Os nossos números</p>
-          <h2 className="text-2xl font-bold text-white">CasaJá em números</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-white">CasaJá em números</h2>
           <p className="text-sm text-zinc-400 mt-2">A plataforma que cresce com Moçambique</p>
         </div>
 
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {stats.map(({ valor, label, sub }) => (
-            <div key={label} className="flex flex-col items-center text-center p-8 rounded-2xl bg-zinc-800/50 border border-zinc-700/50">
-              <p className="text-4xl font-bold text-mint mb-2">{valor}</p>
-              <p className="text-white font-semibold text-sm">{label}</p>
-              <p className="text-zinc-500 text-xs mt-1">{sub}</p>
+            <div key={label} className="flex flex-col items-center text-center p-5 sm:p-8 rounded-2xl bg-zinc-800/50 border border-zinc-700/50">
+              <p className="text-2xl sm:text-4xl font-bold text-mint mb-2">{valor}</p>
+              <p className="text-white font-semibold text-xs sm:text-sm">{label}</p>
+              <p className="text-zinc-500 text-xs mt-1 hidden sm:block">{sub}</p>
             </div>
           ))}
         </div>

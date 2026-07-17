@@ -42,12 +42,12 @@ function Estrelas({ n }: { n: number }) {
 
 export default function Testemunhos() {
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-7xl mx-auto px-10">
-        <div className="flex items-end justify-between mb-12">
+    <section className="w-full bg-white py-12 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
             <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-2">O que dizem de nós</p>
-            <h2 className="text-2xl font-bold">Testemunhos</h2>
+            <h2 className="text-xl sm:text-2xl font-bold">Testemunhos</h2>
             <p className="text-sm text-zinc-500 mt-1">Experiências reais de utilizadores da CasaJá</p>
           </div>
           <div className="flex items-center gap-1.5 text-sm text-zinc-500">
@@ -57,11 +57,11 @@ export default function Testemunhos() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {testemunhos.map(({ nome, papel, texto, estrelas, inicial, cor }) => (
-            <div key={nome} className="bg-white border border-gray-100 rounded-2xl p-7 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div key={nome} className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 flex flex-col gap-5 shadow-sm hover:shadow-md transition-shadow duration-300">
               <Estrelas n={estrelas} />
-              <p className="text-sm text-zinc-600 leading-relaxed flex-1">"{texto}"</p>
+              <p className="text-sm text-zinc-600 leading-relaxed flex-1">&ldquo;{texto}&rdquo;</p>
               <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 ${cor}`}>
                   {inicial}

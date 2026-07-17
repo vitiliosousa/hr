@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   BedDouble, Bath, Square, MapPin, Lock, ChevronLeft,
-  Check, Images, Car, Layers, Calendar, Wifi, Droplets,
-  Zap, Wind, TreePine,
+  Check, Images, Layers, Calendar,
 } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
 import ImovelCard from "@/components/ImovelCard";

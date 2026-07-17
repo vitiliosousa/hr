@@ -1,13 +1,11 @@
-import { DoorClosed, ChevronRight, Clock } from "lucide-react";
-import Image from "next/image";
-import ticket from "@/assets/ticket.svg";
+import { DoorClosed, ChevronRight, Clock, Home } from "lucide-react";
 
 export default function Ticket() {
   return (
     <div className="bg-white w-full shadow-lg py-6 px-4 flex items-center justify-between rounded-lg p-4">
       <div className="flex items-center gap-4">
-        <div className="rounded-lg border">
-          <Image src={ticket} alt="" />
+        <div className="rounded-lg border p-2">
+          <Home className="size-6 text-zinc-400" />
         </div>
         <div className="h-full justify-center flex flex-col">
           <p className="text-xs">Check-In</p>

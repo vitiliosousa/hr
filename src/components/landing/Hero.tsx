@@ -12,31 +12,31 @@ export default function Hero() {
   const router = useRouter();
   const [loc, setLoc] = useState("");
   const [tipo, setTipo] = useState("");
-const [precoMin, setPrecoMin] = useState("");
+  const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
 
   const pesquisar = () => {
     const p = new URLSearchParams();
     if (loc) p.set("localizacao", loc);
     if (tipo) p.set("tipo", tipo);
-if (precoMin) p.set("precoMin", precoMin);
+    if (precoMin) p.set("precoMin", precoMin);
     if (precoMax) p.set("precoMax", precoMax);
     router.push(`/pesquisa?${p.toString()}`);
   };
 
   return (
-    <section className="relative w-full h-[680px] flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[560px] sm:h-[680px] flex flex-col items-center justify-center overflow-hidden py-16 sm:py-0">
       <Image src={fundo} alt="Imóvel" fill className="object-cover object-center" priority />
       <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/80" />
 
-      <div className="relative z-10 flex flex-col items-center gap-10 text-white text-center w-full max-w-3xl px-6">
+      <div className="relative z-10 flex flex-col items-center gap-8 sm:gap-10 text-white text-center w-full max-w-3xl px-4 sm:px-6">
 
         {/* Título */}
         <div className="flex flex-col gap-3">
-          <p className="text-mint text-xs font-bold uppercase tracking-[0.25em]">
+          <p className="text-mint text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em]">
             Marketplace de imóveis em Moçambique
           </p>
-          <h1 className="text-5xl font-bold leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold leading-tight">
             Encontra a tua<br />próxima casa
           </h1>
           <p className="text-white/65 text-sm max-w-sm mx-auto leading-relaxed">
@@ -64,7 +64,7 @@ if (precoMin) p.set("precoMin", precoMin);
           </div>
 
           {/* Linha 2 — Filtros + Botão */}
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
 
             {/* Tipo */}
             <div className="flex-1 bg-gray-100 rounded-xl px-4 py-3 text-left relative">
@@ -82,25 +82,25 @@ if (precoMin) p.set("precoMin", precoMin);
 
             {/* Intervalo de preço */}
             <div className="bg-gray-100 rounded-xl px-4 py-3 text-left flex items-end gap-2">
-              <div>
+              <div className="flex-1 sm:flex-none">
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Preço mín.</p>
                 <input
                   type="number"
                   placeholder="5 000"
                   value={precoMin}
                   onChange={(e) => setPrecoMin(e.target.value)}
-                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
+                  className="w-full sm:w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
                 />
               </div>
               <span className="text-zinc-300 text-sm pb-0.5">|</span>
-              <div>
+              <div className="flex-1 sm:flex-none">
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Preço máx.</p>
                 <input
                   type="number"
                   placeholder="80 000"
                   value={precoMax}
                   onChange={(e) => setPrecoMax(e.target.value)}
-                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
+                  className="w-full sm:w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
                 />
               </div>
               <span className="text-xs font-bold text-zinc-500 pb-0.5">MZN</span>
@@ -109,7 +109,7 @@ if (precoMin) p.set("precoMin", precoMin);
             {/* Botão pesquisar */}
             <button
               onClick={pesquisar}
-              className="bg-mint text-black font-bold px-6 rounded-xl flex items-center gap-2 hover:bg-mint/80 transition-colors duration-150 hover:cursor-pointer text-sm whitespace-nowrap"
+              className="bg-mint text-black font-bold px-6 py-3.5 sm:py-0 rounded-xl flex items-center justify-center gap-2 hover:bg-mint/80 transition-colors duration-150 hover:cursor-pointer text-sm whitespace-nowrap"
             >
               <Search className="size-4" />
               Pesquisar
@@ -118,11 +118,11 @@ if (precoMin) p.set("precoMin", precoMin);
         </div>
 
         {/* Trust badges */}
-        <div className="flex items-center gap-6 text-white/50 text-xs">
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/50 text-xs">
           <span><span className="text-mint font-bold">✓</span> 1.200+ imóveis</span>
-          <span className="w-px h-3 bg-white/15" />
+          <span className="hidden sm:block w-px h-3 bg-white/15" />
           <span><span className="text-mint font-bold">✓</span> 32 cidades</span>
-          <span className="w-px h-3 bg-white/15" />
+          <span className="hidden sm:block w-px h-3 bg-white/15" />
           <span><span className="text-mint font-bold">✓</span> Sem intermediários</span>
         </div>
       </div>

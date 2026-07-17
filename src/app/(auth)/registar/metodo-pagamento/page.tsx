@@ -14,17 +14,17 @@ export default function MetodoPagamento() {
   };
 
   return (
-    <div className="flex flex-col w-3/4 gap-3">
-      <Link href="/registar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition">
+    <div className="flex flex-col w-full gap-3">
+      <Link href="/registar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition w-fit">
         <ChevronLeft className="h-4 w-4" /> Voltar
       </Link>
-      <h1 className="text-3xl font-semibold">Método de pagamento</h1>
+      <h1 className="text-2xl sm:text-3xl font-semibold">Método de pagamento</h1>
       <p className="text-sm text-zinc-500">
         Adiciona um método de pagamento para desbloquear contactos de proprietários.
       </p>
       <form className="flex flex-col gap-4 w-full py-6">
         <FloatingLabelInput label="Número do cartão" name="cardNumber" type="text" required />
-        <div className="flex w-full gap-4">
+        <div className="flex flex-col sm:flex-row w-full gap-4">
           <FloatingLabelInput label="Validade" name="expDate" type="text" required />
           <FloatingLabelInput label="CVC" name="cvc" type="text" required />
         </div>
