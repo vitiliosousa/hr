@@ -5,24 +5,19 @@ import authImage2 from "@/assets/fundo2.svg";
 import authImage3 from "@/assets/loginImage.svg";
 
 const authImages = [
-  { src: authImage2, alt: "Imagem de login 2" },
-  { src: authImage3, alt: "Imagem de login 3" },
+  { src: authImage2, alt: "Imagem de fundo 1" },
+  { src: authImage3, alt: "Imagem de fundo 2" },
 ];
 
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === authImages.length - 1 ? 0 : prevIndex + 1
+      setCurrentImageIndex((prev) =>
+        prev === authImages.length - 1 ? 0 : prev + 1
       );
     }, 10000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -50,8 +45,8 @@ export default function AuthLayout({
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`h-2 w-2 rounded-full ease-in-out duration-300 ${
-                index === currentImageIndex ? "bg-mint w-6" : "bg-gray-300"
+              className={`h-2 rounded-full ease-in-out duration-300 ${
+                index === currentImageIndex ? "bg-mint w-6" : "bg-gray-300 w-2"
               }`}
             />
           ))}

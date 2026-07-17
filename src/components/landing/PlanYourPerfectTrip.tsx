@@ -1,33 +1,32 @@
-import Image from "next/image";
-import { trips } from "@/data/trips";
+import ImovelCard from "@/components/ImovelCard";
+import { imoveis } from "@/data/imoveis";
+import Link from "next/link";
 
 export default function PlanYourPerfectTrip() {
+  const destaques = imoveis.slice(0, 3);
+
   return (
-    <div className="flex flex-col w-4/5 mt-48 text-sm space-y-10 py-10">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <h1 className="font-semibold text-2xl">Plan your perfect trip</h1>
-          <p className="text-sm">
-            Search Flights & Places Hire to our most popular destinations
-          </p>
-        </div>
-        <button className="border border-mint rounded p-2 font-semibold text-sm hover:bg-mint hover:text-white ease-in-out duration-300 hover:cursor-pointer">
-          See more places
-        </button>
-      </div>
-      
-      {/* Cards */}
-      <div className="grid grid-cols-3 gap-4">
-        {trips.map((trip, index) => (
-          <div className="flex shadow-lg gap-4 rounded-xl bg-white p-4" key={index}>
-            <Image src={trip.image} alt="" />
-            <div className="flex flex-col gap-1 justify-center">
-              <p className="font-semibold text-zinc-600">{trip.name}</p>
-              <p className="text-xs ">{trip.description}</p>
-            </div>
+    <section className="w-full bg-white py-20">
+      <div className="max-w-7xl mx-auto px-10">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-2">Selecção da equipa</p>
+            <h2 className="text-2xl font-bold">Imóveis em destaque</h2>
+            <p className="text-sm text-zinc-500 mt-1">Os imóveis mais bem avaliados da plataforma</p>
           </div>
-        ))}
+          <Link href="/pesquisa">
+            <button className="border border-gray-200 text-sm font-semibold px-5 py-2.5 rounded-xl hover:shadow-sm transition hover:cursor-pointer">
+              Ver todos os imóveis →
+            </button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-3 gap-6">
+          {destaques.map((imovel) => (
+            <ImovelCard key={imovel.id} imovel={imovel} />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

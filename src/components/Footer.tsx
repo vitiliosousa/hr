@@ -1,9 +1,145 @@
-import SubscribeNewlestter from "@/components/landing/SubscribeNewlestter";
+import Link from "next/link";
+import { Home, Instagram, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
+
+const links = {
+  arrendatarios: [
+    { label: "Pesquisar imóveis", href: "/pesquisa" },
+    { label: "Como funciona", href: "/#como-funciona" },
+    { label: "Os meus favoritos", href: "/favoritos" },
+    { label: "Criar conta", href: "/registar" },
+  ],
+  senhorios: [
+    { label: "Publicar imóvel", href: "/publicar" },
+    { label: "Os meus anúncios", href: "/meus-imoveis" },
+    { label: "Dicas para senhorios", href: "#" },
+    { label: "Preços e planos", href: "#" },
+  ],
+  empresa: [
+    { label: "Sobre nós", href: "#" },
+    { label: "Contacto", href: "#" },
+    { label: "Política de privacidade", href: "#" },
+    { label: "Termos de utilização", href: "#" },
+  ],
+};
 
 export default function Footer() {
-    return(
-        <footer className="w-full h-full mt-30 bg-mint flex py-10 items-center justify-center">
-            <SubscribeNewlestter/>
-        </footer>
-    )
+  return (
+    <footer className="w-full bg-zinc-900 text-white">
+      {/* Newsletter */}
+      <div className="border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-10 py-10 flex items-center justify-between gap-6">
+          <div>
+            <h3 className="text-lg font-semibold">Recebe os melhores imóveis</h3>
+            <p className="text-sm text-zinc-400 mt-1">
+              Alertas de novos imóveis na tua zona antes de toda a gente.
+            </p>
+          </div>
+          <div className="flex gap-2 flex-shrink-0">
+            <input
+              type="email"
+              placeholder="O teu email"
+              className="bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 outline-none focus:border-mint w-64"
+            />
+            <button className="bg-mint text-black text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-mint/80 transition hover:cursor-pointer whitespace-nowrap">
+              Subscrever
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Links */}
+      <div className="max-w-7xl mx-auto px-10 py-14">
+        <div className="grid grid-cols-4 gap-10">
+          {/* Logo e descrição */}
+          <div className="flex flex-col gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <Home className="size-5 text-mint" />
+              <span className="font-bold text-lg">CasaJá</span>
+            </Link>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              A plataforma mais simples para encontrar ou publicar um imóvel em Moçambique.
+            </p>
+            <div className="flex gap-3 mt-2">
+              {[Instagram, Facebook, Twitter, Linkedin].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-mint hover:text-black transition"
+                >
+                  <Icon className="size-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Para arrendatários */}
+          <div>
+            <p className="font-semibold text-sm mb-4">Para arrendatários</p>
+            <ul className="flex flex-col gap-2.5">
+              {links.arrendatarios.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-zinc-400 hover:text-white transition"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Para senhorios */}
+          <div>
+            <p className="font-semibold text-sm mb-4">Para senhorios</p>
+            <ul className="flex flex-col gap-2.5">
+              {links.senhorios.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-zinc-400 hover:text-white transition"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Empresa */}
+          <div>
+            <p className="font-semibold text-sm mb-4">Empresa</p>
+            <ul className="flex flex-col gap-2.5">
+              {links.empresa.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-zinc-400 hover:text-white transition"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex items-center gap-2 text-zinc-400">
+              <Mail className="size-4" />
+              <a href="mailto:info@casaja.co.mz" className="text-xs hover:text-white transition">
+                info@casaja.co.mz
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-zinc-800">
+        <div className="max-w-7xl mx-auto px-10 py-5 flex items-center justify-between">
+          <p className="text-xs text-zinc-500">
+            © {new Date().getFullYear()} CasaJá. Todos os direitos reservados.
+          </p>
+          <p className="text-xs text-zinc-600">Feito em Maputo 🇲🇿</p>
+        </div>
+      </div>
+    </footer>
+  );
 }
