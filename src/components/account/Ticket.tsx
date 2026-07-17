@@ -64,10 +64,10 @@ export default function Ticket() {
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <button className="bg-mint text-black px-4 py-2 rounded text-xs font-semibold hover:cursor-pointer hover:bg-slamon ease-in-out duration-300">
+          <button className="bg-mint text-black px-4 py-2 rounded text-xs font-semibold hover:cursor-pointer hover:bg-mint ease-in-out duration-300">
             Download Ticket
           </button>
-          <button className="border border-mint text-black px-4 py-2 rounded font-semibold text-xs hover:cursor-pointer hover:bg-slamon ease-in-out duration-300">
+          <button className="border border-mint text-black px-4 py-2 rounded font-semibold text-xs hover:cursor-pointer hover:bg-mint ease-in-out duration-300">
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>

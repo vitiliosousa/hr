@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus, Eye, LockOpen, MapPin, BedDouble, Square, Pencil, Trash2, TrendingUp, Home } from "lucide-react";
+import { Plus, Eye, LockOpen, MapPin, BedDouble, Square, Pencil, Trash2, Home } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
 
 const meusImoveis = imoveis.slice(0, 4).map((im, i) => ({
@@ -21,12 +21,11 @@ export default function MeusImoveis() {
   const activos = meusImoveis.filter((i) => i.estado === "activo");
   const alugados = meusImoveis.filter((i) => i.estado === "alugado");
   const totalContactos = meusImoveis.reduce((s, i) => s + i.contactosDesbloqueados, 0);
-  const totalMZN = meusImoveis.reduce((s, i) => s + i.contactosDesbloqueados * 150, 0);
 
   const lista = tab === "activos" ? activos : tab === "alugados" ? alugados : meusImoveis;
 
   return (
-    <div className="w-full px-10 py-8 pb-16">
+    <div className="max-w-7xl mx-auto w-full px-10 py-8 pb-16">
       {/* Cabeçalho */}
       <div className="flex items-center justify-between mb-8">
         <div>
@@ -41,7 +40,7 @@ export default function MeusImoveis() {
       </div>
 
       {/* Estatísticas */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-3 gap-4 mb-8">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
           <div className="flex items-center justify-between mb-3">
             <p className="text-xs text-zinc-400 font-medium">Total de anúncios</p>
@@ -59,17 +58,9 @@ export default function MeusImoveis() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
           <div className="flex items-center justify-between mb-3">
             <p className="text-xs text-zinc-400 font-medium">Contactos desbloqueados</p>
-            <div className="bg-slamon/10 rounded-lg p-1.5"><LockOpen className="size-4 text-slamon" /></div>
+            <div className="bg-mint/10 rounded-lg p-1.5"><LockOpen className="size-4 text-mint" /></div>
           </div>
-          <p className="text-3xl font-bold text-slamon">{totalContactos}</p>
-        </div>
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-xs text-zinc-400 font-medium">Total gerado</p>
-            <div className="bg-green-50 rounded-lg p-1.5"><TrendingUp className="size-4 text-green-600" /></div>
-          </div>
-          <p className="text-3xl font-bold text-green-600">{totalMZN.toLocaleString("pt-PT")}</p>
-          <p className="text-xs text-zinc-400 mt-0.5">MZN em contactos</p>
+          <p className="text-3xl font-bold text-mint">{totalContactos}</p>
         </div>
       </div>
 
@@ -148,18 +139,12 @@ export default function MeusImoveis() {
                     <p className="text-xs text-zinc-400">Contactos</p>
                   </div>
                 </div>
-                <div className="text-center">
-                  <p className="font-bold text-xl text-green-600">
-                    {(imovel.contactosDesbloqueados * 150).toLocaleString("pt-PT")}
-                  </p>
-                  <p className="text-xs text-zinc-400 mt-0.5">MZN gerados</p>
-                </div>
               </div>
 
               {/* Preço */}
               <div className="text-right flex-shrink-0 min-w-[110px]">
                 <p className="text-xs text-zinc-400 mb-0.5">Preço</p>
-                <p className="text-slamon font-bold text-base">
+                <p className="text-mint font-bold text-base">
                   {imovel.preco.toLocaleString("pt-PT")}
                 </p>
                 <p className="text-xs text-zinc-400">MZN/mês</p>

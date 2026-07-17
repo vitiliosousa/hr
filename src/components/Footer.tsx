@@ -8,10 +8,10 @@ const links = {
     { label: "Os meus favoritos", href: "/favoritos" },
     { label: "Criar conta", href: "/registar" },
   ],
-  senhorios: [
+  proprietarios: [
     { label: "Publicar imóvel", href: "/publicar" },
     { label: "Os meus anúncios", href: "/meus-imoveis" },
-    { label: "Dicas para senhorios", href: "#" },
+    { label: "Dicas para proprietários", href: "#" },
     { label: "Preços e planos", href: "#" },
   ],
   empresa: [
@@ -89,11 +89,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Para senhorios */}
+          {/* Para proprietários */}
           <div>
-            <p className="font-semibold text-sm mb-4">Para senhorios</p>
+            <p className="font-semibold text-sm mb-4">Para proprietários</p>
             <ul className="flex flex-col gap-2.5">
-              {links.senhorios.map((l) => (
+              {links.proprietarios.map((l) => (
                 <li key={l.label}>
                   <Link
                     href={l.href}

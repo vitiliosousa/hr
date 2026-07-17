@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FloatingLabelInput } from "@/components/FloatingLabelInput";
 import { FloatingLabelPasswordInput } from "@/components/FloatingLabelPasswordInput";
 import SocialMedia from "@/components/SocialMedia";
@@ -16,23 +17,23 @@ export default function Entrar() {
               <input type="checkbox" className="mr-2" />
               <label className="text-xs">Lembrar-me</label>
             </div>
-            <a href="/recuperar-senha" className="text-xs text-slamon hover:underline">
+            <Link href="/recuperar-senha" className="text-xs text-mint hover:underline">
               Esqueci a password
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex flex-col items-center gap-4 w-full">
           <button
             type="submit"
-            className="bg-mint text-black text-xs font-semibold h-10 px-4 rounded w-full hover:bg-mint/80 hover:cursor-pointer transition"
+            className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
           >
             Entrar
           </button>
           <p className="text-xs text-center font-semibold">
             Ainda não tens conta?{" "}
-            <a href="/registar" className="text-slamon hover:underline">
+            <Link href="/registar" className="text-mint hover:underline">
               Registar
-            </a>
+            </Link>
           </p>
         </div>
         <div className="flex items-center w-full gap-2">

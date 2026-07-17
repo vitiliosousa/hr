@@ -16,8 +16,8 @@ const TITULOS = [
 ];
 
 const TIPOS_IMOVEL = [
-  "Apartamento", "Casa", "Quarto", "Vivenda",
-  "Flat", "Escritório", "Loja", "Armazém", "Terreno",
+  "Apartamento", "Casa", "Moradia", "Vivenda", "Estúdio",
+  "Quarto", "Flat", "Escritório", "Loja", "Armazém", "Terreno",
 ];
 
 const PROVINCIAS = [
@@ -92,7 +92,7 @@ function FInput({
           className="w-full h-12 border border-gray-200 rounded-xl px-3 pt-4 text-sm outline-none focus:border-black transition bg-white"
         />
         <label className={`absolute left-3 pointer-events-none transition-all duration-150 ${up ? "top-1.5 text-[10px] text-zinc-400" : "top-3.5 text-sm text-zinc-400"}`}>
-          {label}{req && <span className="text-slamon ml-0.5">*</span>}
+          {label}{req && <span className="text-mint ml-0.5">*</span>}
         </label>
       </div>
       {hint && <p className="text-xs text-zinc-400 pl-1">{hint}</p>}
@@ -121,7 +121,7 @@ function FSelect({
         {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
       <label className={`absolute left-3 pointer-events-none transition-all duration-150 ${up ? "top-1.5 text-[10px] text-zinc-400" : "top-3.5 text-sm text-zinc-400"}`}>
-        {label}{req && <span className="text-slamon ml-0.5">*</span>}
+        {label}{req && <span className="text-mint ml-0.5">*</span>}
       </label>
       <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
         <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@ export default function Publicar() {
   /* ── Ecrã de sucesso ── */
   if (publicado) {
     return (
-      <div className="w-full flex flex-col items-center py-20 px-10">
+      <div className="max-w-7xl mx-auto w-full flex flex-col items-center py-20 px-10">
         <div className="max-w-md w-full flex flex-col items-center gap-6 text-center">
           <div className="bg-mint/10 rounded-full p-6">
             <CheckCircle2 className="size-16 text-mint" />
@@ -225,7 +225,7 @@ export default function Publicar() {
   }
 
   return (
-    <div className="w-full px-10 py-8 pb-16">
+    <div className="max-w-7xl mx-auto w-full px-10 py-8 pb-16">
       <div className="w-full flex flex-col gap-6">
 
         {/* Título */}
@@ -270,7 +270,7 @@ export default function Publicar() {
               <h2 className="font-semibold text-lg -mb-2">Informações Básicas</h2>
 
               <div>
-                <SLabel>Tipo de anúncio <span className="text-slamon">*</span></SLabel>
+                <SLabel>Tipo de anúncio <span className="text-mint">*</span></SLabel>
                 <div className="grid grid-cols-2 gap-3">
                   {[{ v: "Aluguer", icon: "🏠" }, { v: "Venda", icon: "🏷️" }].map(({ v, icon }) => (
                     <CardSelect key={v} label={`${icon} ${v}`} active={d.tipoAnuncio === v} onClick={() => set("tipoAnuncio", v)} />
@@ -279,7 +279,7 @@ export default function Publicar() {
               </div>
 
               <div>
-                <SLabel>Tipo de imóvel <span className="text-slamon">*</span></SLabel>
+                <SLabel>Tipo de imóvel <span className="text-mint">*</span></SLabel>
                 <div className="grid grid-cols-3 gap-2">
                   {TIPOS_IMOVEL.map((t) => (
                     <CardSelect key={t} label={t} active={d.tipoImovel === t} onClick={() => set("tipoImovel", t)} />
@@ -288,7 +288,7 @@ export default function Publicar() {
               </div>
 
               <div>
-                <SLabel>Categoria <span className="text-slamon">*</span></SLabel>
+                <SLabel>Categoria <span className="text-mint">*</span></SLabel>
                 <div className="grid grid-cols-2 gap-3">
                   {[{ v: "Residencial", icon: "🏘️" }, { v: "Comercial", icon: "🏢" }].map(({ v, icon }) => (
                     <CardSelect key={v} label={`${icon} ${v}`} active={d.categoria === v} onClick={() => set("categoria", v)} />
@@ -415,7 +415,7 @@ export default function Publicar() {
             <>
               <div className="-mb-2">
                 <h2 className="font-semibold text-lg">Fotografias</h2>
-                <p className="text-sm text-zinc-400 mt-1">Mínimo 3 fotos <span className="text-slamon">*</span> · Máximo 20 fotos</p>
+                <p className="text-sm text-zinc-400 mt-1">Mínimo 3 fotos <span className="text-mint">*</span> · Máximo 20 fotos</p>
               </div>
 
               <div className="border-2 border-dashed border-gray-200 rounded-xl p-12 flex flex-col items-center gap-4 text-center hover:border-mint transition hover:cursor-pointer">
@@ -454,7 +454,7 @@ export default function Publicar() {
               </div>
               <div className="flex flex-col gap-1">
                 <label className="text-sm font-medium text-zinc-600">
-                  Descrição do imóvel <span className="text-slamon">*</span>
+                  Descrição do imóvel <span className="text-mint">*</span>
                 </label>
                 <textarea
                   rows={9}
@@ -474,7 +474,7 @@ export default function Publicar() {
               <h2 className="font-semibold text-lg -mb-2">Disponibilidade</h2>
 
               <div>
-                <SLabel>Estado do imóvel <span className="text-slamon">*</span></SLabel>
+                <SLabel>Estado do imóvel <span className="text-mint">*</span></SLabel>
                 <div className="flex flex-col gap-2">
                   {[
                     { v: "imediata", t: "Disponível imediatamente", d: "O imóvel está pronto para ser arrendado agora" },
@@ -615,7 +615,7 @@ export default function Publicar() {
                     {sec.rows.map(([l, v]) => (
                       <div key={l}>
                         <p className="text-xs text-zinc-400">{l}</p>
-                        <p className={`text-sm font-medium mt-0.5 ${!v ? "text-slamon" : "text-black"}`}>
+                        <p className={`text-sm font-medium mt-0.5 ${!v ? "text-mint" : "text-black"}`}>
                           {v || "Não preenchido"}
                         </p>
                       </div>

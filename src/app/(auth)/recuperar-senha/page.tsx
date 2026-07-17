@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FloatingLabelInput } from "@/components/FloatingLabelInput";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -13,9 +14,9 @@ export default function RecuperarSenha() {
 
   return (
     <div className="flex flex-col w-3/4 gap-3">
-      <a href="/entrar" className="flex items-center gap-2 text-sm font-semibold">
+      <Link href="/entrar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition">
         <ChevronLeft className="h-4 w-4" /> Voltar para o login
-      </a>
+      </Link>
       <h1 className="text-3xl font-semibold">Esqueceste a password?</h1>
       <p className="text-sm text-zinc-500">
         Não te preocupes. Introduz o teu email e enviaremos um código de recuperação.
@@ -25,7 +26,7 @@ export default function RecuperarSenha() {
         <button
           onClick={next}
           type="button"
-          className="bg-mint text-black text-xs font-semibold h-10 px-4 rounded w-full hover:bg-mint/80 hover:cursor-pointer transition"
+          className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
         >
           Enviar código
         </button>

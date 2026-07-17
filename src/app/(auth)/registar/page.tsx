@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FloatingLabelInput } from "@/components/FloatingLabelInput";
 import { FloatingLabelPasswordInput } from "@/components/FloatingLabelPasswordInput";
 import { useRouter } from "next/navigation";
@@ -34,8 +35,8 @@ export default function Registar() {
             <input type="checkbox" className="mr-2" />
             <label className="text-xs">
               Concordo com os{" "}
-              <a href="#" className="text-slamon">Termos</a> e{" "}
-              <a href="#" className="text-slamon">Política de Privacidade</a>
+              <Link href="#" className="text-mint">Termos</Link> e{" "}
+              <Link href="#" className="text-mint">Política de Privacidade</Link>
             </label>
           </div>
         </div>
@@ -43,15 +44,15 @@ export default function Registar() {
           <button
             onClick={next}
             type="button"
-            className="bg-mint text-black text-xs font-semibold h-10 px-4 rounded w-full hover:bg-mint/80 hover:cursor-pointer transition"
+            className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
           >
             Criar conta
           </button>
           <p className="text-xs text-center font-semibold">
             Já tens conta?{" "}
-            <a href="/entrar" className="text-slamon hover:underline">
+            <Link href="/entrar" className="text-mint hover:underline">
               Entrar
-            </a>
+            </Link>
           </p>
         </div>
         <div className="flex items-center w-full gap-2">

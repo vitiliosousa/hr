@@ -13,7 +13,7 @@ export default function CoverPicture() {
                 priority
             />
             
-            <button className="absolute bottom-4 right-4 bg-mint hover:bg-slamon text-gray-800 px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer z-10">
+            <button className="absolute bottom-4 right-4 bg-mint hover:bg-mint text-gray-800 px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg cursor-pointer z-10">
                 <Upload className="h-4 w-4" />
                 <span className="text-xs">Upload new cover</span>
             </button>

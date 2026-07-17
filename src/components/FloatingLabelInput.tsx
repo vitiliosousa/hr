@@ -31,7 +31,7 @@ export function FloatingLabelInput({
     <div className="relative w-full" suppressHydrationWarning>
       <input
         {...props}
-        className={`w-full h-10 border border-black rounded px-2 text-xs pt-2 focus:outline-none focus:ring-1 focus:ring-black ${className}`}
+        className={`w-full h-11 border border-gray-200 rounded-xl px-3 text-xs pt-2 focus:outline-none focus:border-black transition ${className}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         value={inputValue}

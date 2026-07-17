@@ -8,7 +8,7 @@ export default function ProfilePicture() {
             <div className="relative w-full flex justify-center -mt-16">
                 <div className="relative group">
                     {/* Imagem de perfil (metade dentro da capa) */}
-                    <div className="relative h-32 w-32 rounded-full border-4 border-slamon overflow-hidden shadow-lg">
+                    <div className="relative h-32 w-32 rounded-full border-4 border-mint overflow-hidden shadow-lg">
                         <Image
                             src={avatar}
                             alt="Profile picture"
@@ -18,7 +18,7 @@ export default function ProfilePicture() {
                     </div>
                     
                     {/* Ícone de edição */}
-                    <div className="absolute bottom-2 right-2 bg-slamon p-2 rounded-full cursor-pointer hover:bg-mint-dark transition-colors ">
+                    <div className="absolute bottom-2 right-2 bg-mint p-2 rounded-full cursor-pointer hover:bg-mint-dark transition-colors ">
                         <Edit className="h-4 w-4 text-white" />
                     </div>
                 </div>

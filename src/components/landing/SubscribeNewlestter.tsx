@@ -18,7 +18,7 @@ export default function SubscribeNewlestter() {
             placeholder="Your email address"
             className="w-80 h-10 px-4 rounded placeholder:text-blackish bg-white text-xs"
           />
-          <button className="w-30 h-10 bg-blackish font-semibold text-white rounded ml-2 text-xs hover:cursor-pointer ease-in-out duration-300 hover:bg-slamon hover:text-blackish">
+          <button className="w-30 h-10 bg-blackish font-semibold text-white rounded ml-2 text-xs hover:cursor-pointer ease-in-out duration-300 hover:bg-mint hover:text-blackish">
             Subscribe
           </button>
         </div>

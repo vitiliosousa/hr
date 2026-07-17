@@ -14,7 +14,7 @@ const testemunhos = [
     nome: "Carlos Sitoe",
     papel: "Proprietário · Matola",
     texto:
-      "Publiquei o meu imóvel gratuitamente e recebi 12 contactos na primeira semana. Cada desbloqueio representa um interessado real. Já aluguei dois imóveis através da CasaJá e recomendo a todos os senhorios.",
+      "Publiquei o meu imóvel gratuitamente e recebi 12 contactos na primeira semana. Cada desbloqueio representa um interessado real. Já aluguei dois imóveis através da CasaJá e recomendo a todos os proprietários.",
     estrelas: 5,
     inicial: "C",
     cor: "bg-blue-100 text-blue-700",

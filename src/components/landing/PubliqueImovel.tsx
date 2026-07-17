@@ -3,7 +3,7 @@ import { ArrowRight, BadgeCheck, Coins, TrendingUp } from "lucide-react";
 
 const beneficios = [
   { icone: BadgeCheck, texto: "Publicação 100% gratuita" },
-  { icone: Coins,      texto: "Recebe 150 MZN por cada contacto desbloqueado" },
+  { icone: Coins,      texto: "Apenas interessados reais desbloqueiam o teu contacto" },
   { icone: TrendingUp, texto: "Anúncio visível para milhares de utilizadores" },
 ];
 
@@ -16,13 +16,13 @@ export default function PubliqueImovel() {
             {/* Conteúdo */}
             <div className="flex-1 p-14 flex flex-col gap-8">
               <div className="flex flex-col gap-3">
-                <p className="text-mint text-xs font-semibold uppercase tracking-widest">Para senhorios</p>
+                <p className="text-mint text-xs font-semibold uppercase tracking-widest">Para proprietários</p>
                 <h2 className="text-3xl font-bold text-white leading-snug">
                   Tens um imóvel<br />para alugar?
                 </h2>
                 <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">
                   Publica o teu anúncio gratuitamente e chega a centenas de interessados.
-                  Só pagas quando alguém quer falar contigo — e esse valor vai directamente para ti.
+                  Sem comissões, sem burocracia — só resultados reais.
                 </p>
               </div>
 

@@ -37,7 +37,7 @@ export function FloatingLabelPasswordInput({
       <input
         {...props}
         type={showPassword ? 'text' : 'password'}
-        className={`w-full h-10 border border-black rounded px-2 text-xs pt-2 focus:outline-none focus:ring-1 focus:ring-black pr-8 ${className}`}
+        className={`w-full h-11 border border-gray-200 rounded-xl px-3 text-xs pt-2 focus:outline-none focus:border-black transition pr-8 ${className}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         value={inputValue}

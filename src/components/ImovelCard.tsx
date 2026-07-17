@@ -69,7 +69,7 @@ export default function ImovelCard({ imovel }: { imovel: Imovel }) {
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
           <div>
             <p className="text-xs text-zinc-400">A partir de</p>
-            <p className="text-slamon font-bold text-base">
+            <p className="text-mint font-bold text-base">
               {imovel.preco.toLocaleString("pt-PT")}{" "}
               <span className="text-xs font-normal text-zinc-400">MZN/mês</span>
             </p>

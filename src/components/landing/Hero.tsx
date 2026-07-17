@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
@@ -12,16 +12,14 @@ export default function Hero() {
   const router = useRouter();
   const [loc, setLoc] = useState("");
   const [tipo, setTipo] = useState("");
-  const [quartos, setQuartos] = useState("");
-  const [precoMin, setPrecoMin] = useState("");
+const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
 
   const pesquisar = () => {
     const p = new URLSearchParams();
     if (loc) p.set("localizacao", loc);
     if (tipo) p.set("tipo", tipo);
-    if (quartos) p.set("quartos", quartos);
-    if (precoMin) p.set("precoMin", precoMin);
+if (precoMin) p.set("precoMin", precoMin);
     if (precoMax) p.set("precoMax", precoMax);
     router.push(`/pesquisa?${p.toString()}`);
   };
@@ -36,13 +34,13 @@ export default function Hero() {
         {/* Título */}
         <div className="flex flex-col gap-3">
           <p className="text-mint text-xs font-bold uppercase tracking-[0.25em]">
-            Marketplace #1 de imóveis em Moçambique
+            Marketplace de imóveis em Moçambique
           </p>
           <h1 className="text-5xl font-bold leading-tight">
             Encontra a tua<br />próxima casa
           </h1>
           <p className="text-white/65 text-sm max-w-sm mx-auto leading-relaxed">
-            Contacta o proprietário directamente — sem intermediários, sem comissões.
+            Milhares de imóveis disponíveis em todo o país.
           </p>
         </div>
 
@@ -69,32 +67,17 @@ export default function Hero() {
           <div className="flex gap-2">
 
             {/* Tipo */}
-            <div className="flex-1 bg-gray-100 rounded-xl px-4 py-3 text-left">
+            <div className="flex-1 bg-gray-100 rounded-xl px-4 py-3 text-left relative">
               <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Tipo</p>
               <select
                 value={tipo}
                 onChange={(e) => setTipo(e.target.value)}
-                className="w-full text-sm font-medium text-zinc-900 bg-transparent outline-none appearance-none hover:cursor-pointer mt-0.5"
+                className="w-full text-sm font-medium text-zinc-900 bg-transparent outline-none appearance-none hover:cursor-pointer mt-0.5 pr-5"
               >
                 <option value="">Todos os tipos</option>
                 {TIPOS.map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
-            </div>
-
-            {/* Quartos */}
-            <div className="w-36 bg-gray-100 rounded-xl px-4 py-3 text-left">
-              <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Quartos</p>
-              <select
-                value={quartos}
-                onChange={(e) => setQuartos(e.target.value)}
-                className="w-full text-sm font-medium text-zinc-900 bg-transparent outline-none appearance-none hover:cursor-pointer mt-0.5"
-              >
-                <option value="">Qualquer</option>
-                <option value="1">1 quarto</option>
-                <option value="2">2 quartos</option>
-                <option value="3">3 quartos</option>
-                <option value="4+">4+ quartos</option>
-              </select>
+              <ChevronDown className="absolute right-3 bottom-3.5 size-3.5 text-zinc-400 pointer-events-none" />
             </div>
 
             {/* Intervalo de preço */}
@@ -109,7 +92,7 @@ export default function Hero() {
                   className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none placeholder:text-zinc-400 mt-0.5"
                 />
               </div>
-              <span className="text-zinc-400 text-sm pb-0.5">—</span>
+              <span className="text-zinc-300 text-sm pb-0.5">|</span>
               <div>
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Preço máx.</p>
                 <input

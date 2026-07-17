@@ -22,7 +22,7 @@ export default function NovaSenha() {
         <button
           onClick={next}
           type="button"
-          className="bg-mint text-black text-xs font-semibold h-10 px-4 rounded w-full hover:bg-mint/80 hover:cursor-pointer transition"
+          className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
         >
           Guardar password
         </button>

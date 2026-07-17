@@ -2,6 +2,7 @@
 
 import { FloatingLabelInput } from "@/components/FloatingLabelInput";
 import { FloatingLabelSelect } from "@/components/FloatingLabelSelect";
+import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -14,9 +15,9 @@ export default function MetodoPagamento() {
 
   return (
     <div className="flex flex-col w-3/4 gap-3">
-      <a href="/registar" className="flex items-center gap-2 text-sm font-semibold">
+      <Link href="/registar" className="flex items-center gap-2 text-sm font-semibold hover:text-mint transition">
         <ChevronLeft className="h-4 w-4" /> Voltar
-      </a>
+      </Link>
       <h1 className="text-3xl font-semibold">Método de pagamento</h1>
       <p className="text-sm text-zinc-500">
         Adiciona um método de pagamento para desbloquear contactos de proprietários.
@@ -47,7 +48,7 @@ export default function MetodoPagamento() {
           <button
             onClick={concluir}
             type="button"
-            className="bg-mint text-black text-xs font-semibold h-10 px-4 rounded w-full hover:bg-mint/80 hover:cursor-pointer transition"
+            className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
           >
             Guardar e concluir registo
           </button>
