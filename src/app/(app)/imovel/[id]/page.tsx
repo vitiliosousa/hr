@@ -6,6 +6,7 @@ import {
   Zap, Wind, TreePine,
 } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
+import ImovelCard from "@/components/ImovelCard";
 
 export default async function DetalheImovel({
   params,
@@ -19,6 +20,8 @@ export default async function DetalheImovel({
   const dataFormatada = new Date(imovel.dataPublicacao).toLocaleDateString("pt-PT", {
     day: "numeric", month: "long", year: "numeric",
   });
+
+  const destaque = imoveis.filter((i) => i.id !== imovel.id).slice(0, 4);
 
   return (
     <div className="w-full flex flex-col pb-24">
@@ -258,6 +261,24 @@ export default async function DetalheImovel({
               Reportar este anúncio
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* Imóveis em destaque */}
+      <div className="max-w-7xl mx-auto w-full px-10 mt-16">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-1">Poderá gostar</p>
+            <h2 className="text-xl font-bold">Imóveis em destaque</h2>
+          </div>
+          <Link href="/pesquisa" className="text-sm font-semibold text-mint hover:underline">
+            Ver todos →
+          </Link>
+        </div>
+        <div className="grid grid-cols-4 gap-5">
+          {destaque.map((im) => (
+            <ImovelCard key={im.id} imovel={im} />
+          ))}
         </div>
       </div>
     </div>
