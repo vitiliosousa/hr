@@ -254,7 +254,7 @@ export default function Publicar() {
               const done = passo > n;
               const cur = passo === n;
               return (
-                <div key={n} className="flex items-center flex-1 last:flex-none">
+                <div key={n} className="flex items-center last:flex-none">
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
                     done ? "bg-mint text-black" : cur ? "bg-black text-white" : "bg-gray-100 text-zinc-400"
                   }`}>
