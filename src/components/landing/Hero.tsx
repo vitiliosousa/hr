@@ -27,7 +27,7 @@ if (precoMin) p.set("precoMin", precoMin);
   return (
     <section className="relative w-full h-[680px] flex flex-col items-center justify-center overflow-hidden">
       <Image src={fundo} alt="Imóvel" fill className="object-cover object-center" priority />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/80" />
 
       <div className="relative z-10 flex flex-col items-center gap-10 text-white text-center w-full max-w-3xl px-6">
 
@@ -49,7 +49,7 @@ if (precoMin) p.set("precoMin", precoMin);
 
           {/* Linha 1 — Localização */}
           <div className="flex items-center gap-3 bg-gray-100 rounded-xl px-4 py-3">
-            <MapPin className="size-4 text-zinc-500 flex-shrink-0" />
+            <MapPin className="size-4 text-zinc-500 shrink-0" />
             <div className="flex-1 text-left">
               <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Localização</p>
               <input
@@ -58,7 +58,7 @@ if (precoMin) p.set("precoMin", precoMin);
                 value={loc}
                 onChange={(e) => setLoc(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && pesquisar()}
-                className="w-full text-sm font-medium text-zinc-900 bg-transparent outline-none placeholder:text-zinc-400 mt-0.5"
+                className="w-full text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
               />
             </div>
           </div>
@@ -89,7 +89,7 @@ if (precoMin) p.set("precoMin", precoMin);
                   placeholder="5 000"
                   value={precoMin}
                   onChange={(e) => setPrecoMin(e.target.value)}
-                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none placeholder:text-zinc-400 mt-0.5"
+                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
                 />
               </div>
               <span className="text-zinc-300 text-sm pb-0.5">|</span>
@@ -100,7 +100,7 @@ if (precoMin) p.set("precoMin", precoMin);
                   placeholder="80 000"
                   value={precoMax}
                   onChange={(e) => setPrecoMax(e.target.value)}
-                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none placeholder:text-zinc-400 mt-0.5"
+                  className="w-20 text-sm font-medium text-zinc-900 bg-transparent outline-none mt-0.5"
                 />
               </div>
               <span className="text-xs font-bold text-zinc-500 pb-0.5">MZN</span>

@@ -89,7 +89,7 @@ function FInput({
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           placeholder={focus ? placeholder : ""}
-          className="w-full h-12 border border-gray-200 rounded-xl px-3 pt-4 text-sm outline-none focus:border-black transition bg-white"
+          className="w-full h-12 border border-gray-200 rounded-xl px-3 pt-4 text-sm outline-none bg-white"
         />
         <label className={`absolute left-3 pointer-events-none transition-all duration-150 ${up ? "top-1.5 text-[10px] text-zinc-400" : "top-3.5 text-sm text-zinc-400"}`}>
           {label}{req && <span className="text-mint ml-0.5">*</span>}
@@ -115,7 +115,7 @@ function FSelect({
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
-        className="w-full h-12 border border-gray-200 rounded-xl px-3 pt-4 text-sm outline-none focus:border-black appearance-none transition bg-white"
+        className="w-full h-12 border border-gray-200 rounded-xl px-3 pt-4 text-sm outline-none bg-white transition appearance-none"
       >
         <option value="" />
         {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -139,7 +139,7 @@ function Toggle({ value, onChange, label }: { value: boolean; onChange: (v: bool
       <button
         type="button"
         onClick={() => onChange(!value)}
-        className={`w-11 h-6 rounded-full transition-colors duration-200 relative flex-shrink-0 hover:cursor-pointer ${value ? "bg-mint" : "bg-gray-200"}`}
+        className={`w-11 h-6 rounded-full transition-colors duration-200 relative shrink-0 hover:cursor-pointer ${value ? "bg-mint" : "bg-gray-200"}`}
       >
         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-all duration-200 ${value ? "left-6" : "left-1"}`} />
       </button>
@@ -156,7 +156,7 @@ function ChipCheck({ label, checked, onClick }: { label: string; checked: boolea
         checked ? "border-mint bg-mint/5 text-black font-medium" : "border-gray-200 text-zinc-500 hover:border-gray-300"
       }`}
     >
-      <div className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center ${checked ? "bg-mint" : "border border-gray-300"}`}>
+      <div className={`w-4 h-4 rounded shrink-0 flex items-center justify-center ${checked ? "bg-mint" : "border border-gray-300"}`}>
         {checked && <Check className="size-3 text-black" />}
       </div>
       {label}
@@ -246,8 +246,8 @@ export default function Publicar() {
               const done = passo > n;
               const cur = passo === n;
               return (
-                <div key={n} className="flex items-center flex-1 last:flex-none">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 transition-colors ${
+                <div key={n} className="flex items-center last:flex-none">
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
                     done ? "bg-mint text-black" : cur ? "bg-black text-white" : "bg-gray-100 text-zinc-400"
                   }`}>
                     {done ? <Check className="size-3" /> : n}
@@ -461,7 +461,7 @@ export default function Publicar() {
                   value={d.descricao}
                   onChange={(e) => set("descricao", e.target.value)}
                   placeholder={"Descreve o teu imóvel com detalhe...\n\nEx: Apartamento T2 localizado na Polana, em zona residencial tranquila. Completamente mobilado e equipado. Dispõe de sala espaçosa com varanda, cozinha americana, dois quartos com roupeiro embutido e casa de banho com banheira. Condomínio com piscina e segurança 24h."}
-                  className="border border-gray-200 rounded-xl p-4 text-sm resize-none outline-none focus:border-black transition leading-relaxed"
+                  className="border border-gray-200 rounded-xl p-4 text-sm resize-none outline-none transition leading-relaxed"
                 />
                 <p className="text-xs text-zinc-400 text-right">{d.descricao.length} caracteres</p>
               </div>

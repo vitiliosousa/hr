@@ -86,9 +86,9 @@ export default function MeusImoveis() {
             key={imovel.id}
             className="bg-white rounded-2xl shadow-sm border border-gray-100 flex overflow-hidden hover:shadow-md transition-shadow duration-200"
           >
-            <div className="relative w-52 h-40 flex-shrink-0">
+            <div className="relative w-52 h-40 shrink-0">
               <Image src={imovel.imagem} alt={imovel.titulo} fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-black/10 to-transparent" />
             </div>
 
             <div className="flex flex-1 items-center gap-8 p-6">
@@ -97,7 +97,7 @@ export default function MeusImoveis() {
                 <div className="flex items-center gap-2 mb-1.5">
                   <h3 className="font-semibold text-sm truncate">{imovel.titulo}</h3>
                   <span
-                    className={`text-xs px-2.5 py-0.5 rounded-full font-medium flex-shrink-0 ${
+                    className={`text-xs px-2.5 py-0.5 rounded-full font-medium shrink-0 ${
                       imovel.estado === "activo"
                         ? "bg-mint/10 text-mint"
                         : "bg-orange-100 text-orange-600"
@@ -124,7 +124,7 @@ export default function MeusImoveis() {
               </div>
 
               {/* Métricas */}
-              <div className="flex gap-8 flex-shrink-0">
+              <div className="flex gap-8 shrink-0">
                 <div className="text-center">
                   <p className="font-bold text-xl">{imovel.vistas}</p>
                   <div className="flex items-center gap-1 justify-center mt-0.5">
@@ -142,7 +142,7 @@ export default function MeusImoveis() {
               </div>
 
               {/* Preço */}
-              <div className="text-right flex-shrink-0 min-w-[110px]">
+              <div className="text-right shrink-0 min-w-[110px]">
                 <p className="text-xs text-zinc-400 mb-0.5">Preço</p>
                 <p className="text-mint font-bold text-base">
                   {imovel.preco.toLocaleString("pt-PT")}
@@ -151,7 +151,7 @@ export default function MeusImoveis() {
               </div>
 
               {/* Acções */}
-              <div className="flex flex-col gap-2 flex-shrink-0">
+              <div className="flex flex-col gap-2 shrink-0">
                 <Link href={`/imovel/${imovel.id}`}>
                   <button className="flex items-center gap-1.5 text-xs border border-gray-200 px-3.5 py-2 rounded-lg hover:bg-gray-50 transition hover:cursor-pointer w-full justify-center">
                     <Eye className="size-3" /> Ver
