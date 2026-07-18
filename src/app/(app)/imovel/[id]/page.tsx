@@ -278,7 +278,7 @@ export default async function DetalheImovel({
               {/* CTA — escondido no mobile (barra fixa em baixo) */}
               <Link href={`/imovel/${imovel.id}/desbloquear`} className="hidden lg:block">
                 <button className="w-full bg-mint text-black font-bold text-sm py-3.5 rounded-xl hover:bg-mint/80 transition duration-200 hover:cursor-pointer">
-                  Desbloquear contacto — 150 MZN
+                  Desbloquear contacto — 25 MZN
                 </button>
               </Link>
 
@@ -321,7 +321,7 @@ export default async function DetalheImovel({
         </div>
         <Link href={`/imovel/${imovel.id}/desbloquear`} className="shrink-0">
           <button className="bg-mint text-black font-bold text-xs sm:text-sm px-4 py-3 rounded-xl hover:bg-mint/80 transition hover:cursor-pointer whitespace-nowrap">
-            Desbloquear — 150 MZN
+            Desbloquear — 25 MZN
           </button>
         </Link>
       </div>

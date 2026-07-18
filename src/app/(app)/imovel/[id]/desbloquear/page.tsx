@@ -4,12 +4,12 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ChevronLeft, CheckCircle, Lock, Phone, CreditCard,
+  ChevronLeft, CheckCircle, Lock, Phone, Smartphone,
   User, Mail, ShieldCheck, BedDouble, Bath, Square,
 } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
 
-type Metodo = "mpesa" | "cartao";
+type Metodo = "mpesa" | "emola";
 type Estado = "idle" | "sucesso";
 
 export default function Desbloquear({
@@ -23,9 +23,6 @@ export default function Desbloquear({
   const [metodo, setMetodo] = useState<Metodo>("mpesa");
   const [estado, setEstado] = useState<Estado>("idle");
   const [telefone, setTelefone] = useState("");
-  const [cardNum, setCardNum] = useState("");
-  const [validade, setValidade] = useState("");
-  const [cvc, setCvc] = useState("");
 
   /* ── Ecrã de sucesso ── */
   if (estado === "sucesso") {
@@ -145,7 +142,7 @@ export default function Desbloquear({
                 </div>
                 <div className="flex items-center justify-between gap-3 text-zinc-600">
                   <span>Desbloqueio de contacto</span>
-                  <span className="font-semibold text-mint shrink-0">150 MZN</span>
+                  <span className="font-semibold text-mint shrink-0">25 MZN</span>
                 </div>
               </div>
 
@@ -153,7 +150,7 @@ export default function Desbloquear({
 
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-bold">Total a pagar agora</span>
-                <span className="text-xl font-bold text-mint">150 MZN</span>
+                <span className="text-xl font-bold text-mint">25 MZN</span>
               </div>
             </div>
 
@@ -186,7 +183,7 @@ export default function Desbloquear({
                   <p className="text-xs text-zinc-500">Acesso imediato · Pagamento único</p>
                 </div>
               </div>
-              <p className="text-2xl sm:text-3xl font-bold text-mint shrink-0">150 MZN</p>
+              <p className="text-2xl sm:text-3xl font-bold text-mint shrink-0">25 MZN</p>
             </div>
 
             {/* Método de pagamento */}
@@ -195,8 +192,8 @@ export default function Desbloquear({
 
               <div className="flex flex-col sm:flex-row gap-3">
                 {([
-                  { key: "mpesa",  icon: Phone,      label: "M-Pesa" },
-                  { key: "cartao", icon: CreditCard, label: "Cartão bancário" },
+                  { key: "mpesa", icon: Phone,      label: "M-Pesa" },
+                  { key: "emola", icon: Smartphone, label: "e-Mola" },
                 ] as { key: Metodo; icon: typeof Phone; label: string }[]).map(({ key, icon: Icon, label }) => (
                   <button
                     key={key}
@@ -212,74 +209,31 @@ export default function Desbloquear({
                 ))}
               </div>
 
-              {metodo === "mpesa" ? (
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                    Número M-Pesa
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="84 123 456"
-                    value={telefone}
-                    onChange={(e) => setTelefone(e.target.value)}
-                    className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
-                  />
-                  <p className="text-xs text-zinc-400">
-                    Receberás um pedido de confirmação no teu telemóvel
-                  </p>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                      Número do cartão
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="0000 0000 0000 0000"
-                      value={cardNum}
-                      onChange={(e) => setCardNum(e.target.value)}
-                      className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
-                    />
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <div className="flex-1 flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                        Validade
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="MM/AA"
-                        value={validade}
-                        onChange={(e) => setValidade(e.target.value)}
-                        className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
-                      />
-                    </div>
-                    <div className="w-full sm:w-32 flex flex-col gap-1.5">
-                      <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
-                        CVC
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="123"
-                        value={cvc}
-                        onChange={(e) => setCvc(e.target.value)}
-                        className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
+                  Número {metodo === "mpesa" ? "M-Pesa" : "e-Mola"}
+                </label>
+                <input
+                  type="tel"
+                  placeholder="84 123 456"
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
+                  className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
+                />
+                <p className="text-xs text-zinc-400">
+                  Receberás um pedido de confirmação no teu telemóvel
+                </p>
+              </div>
 
               <button
                 onClick={() => setEstado("sucesso")}
                 className="w-full bg-mint text-black font-bold text-sm py-4 rounded-xl hover:bg-mint/80 transition duration-200 hover:cursor-pointer"
               >
-                Pagar 150 MZN e desbloquear contacto
+                Pagar 25 MZN e desbloquear contacto
               </button>
 
               <p className="text-xs text-zinc-400 text-center">
-                Pagamento encriptado e seguro. Não armazenamos dados do cartão.
+                Pagamento encriptado e seguro via {metodo === "mpesa" ? "M-Pesa" : "e-Mola"}.
               </p>
             </div>
           </div>

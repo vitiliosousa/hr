@@ -17,7 +17,7 @@ const passos = [
     numero: "03",
     icone: LockOpen,
     titulo: "Contacto directo",
-    descricao: "O interessado paga 150 MZN para desbloquear o teu contacto. Esse valor vai directamente para ti.",
+    descricao: "O interessado paga 25 MZN para desbloquear o teu contacto. Esse valor vai directamente para ti.",
   },
 ];
 

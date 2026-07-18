@@ -649,7 +649,7 @@ export default function Publicar() {
                 <p className="font-semibold text-sm mb-1.5">Pronto para publicar</p>
                 <p className="text-xs text-zinc-500 leading-relaxed">
                   O anúncio será publicado gratuitamente e ficará visível a todos os utilizadores da CasaJá.
-                  Receberás uma notificação cada vez que alguém desbloquear o teu contacto (150 MZN por desbloqueio).
+                  Receberás uma notificação cada vez que alguém desbloquear o teu contacto (25 MZN por desbloqueio).
                 </p>
               </div>
             </>
