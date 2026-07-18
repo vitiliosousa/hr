@@ -30,20 +30,20 @@ export default function Desbloquear({
   /* ── Ecrã de sucesso ── */
   if (estado === "sucesso") {
     return (
-      <div className="w-full py-16 pb-24">
-        <div className="max-w-7xl mx-auto w-full px-10 flex flex-col items-center gap-8 text-center">
+      <div className="w-full py-12 sm:py-16 pb-24">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col items-center gap-6 sm:gap-8 text-center">
           <div className="bg-green-50 rounded-full p-5">
-            <CheckCircle className="size-16 text-green-500" />
+            <CheckCircle className="size-14 sm:size-16 text-green-500" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Contacto desbloqueado!</h1>
-            <p className="text-sm text-zinc-500 mt-2 leading-relaxed">
+            <h1 className="text-xl sm:text-2xl font-bold">Contacto desbloqueado!</h1>
+            <p className="text-sm text-zinc-500 mt-2 leading-relaxed max-w-md mx-auto">
               Já podes contactar directamente o proprietário de{" "}
               <strong className="text-black">{imovel.titulo}</strong>
             </p>
           </div>
 
-          <div className="bg-white shadow-sm rounded-2xl p-6 w-full max-w-sm flex flex-col gap-3 border border-gray-100">
+          <div className="bg-white shadow-sm rounded-2xl p-5 sm:p-6 w-full max-w-sm flex flex-col gap-3 border border-gray-100">
             <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider text-left">
               Dados do proprietário
             </p>
@@ -56,16 +56,16 @@ export default function Desbloquear({
                 <div className="w-9 h-9 rounded-full bg-mint/10 flex items-center justify-center flex-shrink-0">
                   <Icon className="size-4 text-mint" />
                 </div>
-                <div className="text-left">
+                <div className="text-left min-w-0">
                   <p className="text-xs text-zinc-400">{label}</p>
-                  <p className="text-sm font-semibold">{val}</p>
+                  <p className="text-sm font-semibold break-all">{val}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <Link href={`/imovel/${imovel.id}`}>
-            <button className="border border-gray-200 text-black text-sm font-semibold px-8 py-3 rounded-xl hover:bg-gray-50 transition hover:cursor-pointer">
+          <Link href={`/imovel/${imovel.id}`} className="w-full max-w-sm sm:w-auto">
+            <button className="w-full border border-gray-200 text-black text-sm font-semibold px-8 py-3 rounded-xl hover:bg-gray-50 transition hover:cursor-pointer">
               Voltar ao imóvel
             </button>
           </Link>
@@ -76,8 +76,8 @@ export default function Desbloquear({
 
   /* ── Formulário de pagamento ── */
   return (
-    <div className="w-full py-8 pb-24">
-      <div className="max-w-7xl mx-auto w-full px-10 flex flex-col gap-6">
+    <div className="w-full py-6 sm:py-8 pb-24">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-10 flex flex-col gap-5 sm:gap-6">
 
         {/* Breadcrumb */}
         <Link
@@ -88,21 +88,21 @@ export default function Desbloquear({
         </Link>
 
         <div>
-          <h1 className="text-2xl font-bold">Desbloquear contacto</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">Desbloquear contacto</h1>
           <p className="text-sm text-zinc-500 mt-1">
             Pagamento único para acederes directamente ao proprietário
           </p>
         </div>
 
         {/* Layout de duas colunas */}
-        <div className="flex gap-8 items-start">
+        <div className="flex flex-col-reverse lg:flex-row gap-6 lg:gap-8 items-stretch lg:items-start">
 
           {/* ── Coluna esquerda: resumo ── */}
-          <div className="flex-1 flex flex-col gap-5">
+          <div className="flex-1 flex flex-col gap-5 min-w-0">
 
             {/* Card do imóvel */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="relative w-full h-52">
+              <div className="relative w-full h-44 sm:h-52">
                 <Image
                   src={imovel.fotos?.[0] ?? imovel.imagem}
                   alt={imovel.titulo}
@@ -114,10 +114,10 @@ export default function Desbloquear({
                   {imovel.tipo}
                 </span>
               </div>
-              <div className="p-5">
+              <div className="p-4 sm:p-5">
                 <h2 className="font-bold text-base">{imovel.titulo}</h2>
                 <p className="text-sm text-zinc-500 mt-1">{imovel.localizacao}</p>
-                <div className="flex items-center gap-4 mt-3 text-xs text-zinc-500">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-zinc-500">
                   <span className="flex items-center gap-1">
                     <BedDouble className="size-3.5" />
                     {imovel.quartos > 0 ? `${imovel.quartos} quartos` : "Estúdio"}
@@ -135,23 +135,23 @@ export default function Desbloquear({
             </div>
 
             {/* Resumo do pedido */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col gap-4">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-5 flex flex-col gap-4">
               <p className="font-bold text-sm">Resumo do pedido</p>
 
               <div className="flex flex-col gap-2 text-sm">
-                <div className="flex items-center justify-between text-zinc-600">
+                <div className="flex items-start sm:items-center justify-between gap-3 text-zinc-600">
                   <span>Aluguer mensal do imóvel</span>
-                  <span className="font-semibold">{imovel.preco.toLocaleString("pt-PT")} MZN/mês</span>
+                  <span className="font-semibold text-right shrink-0">{imovel.preco.toLocaleString("pt-PT")} MZN/mês</span>
                 </div>
-                <div className="flex items-center justify-between text-zinc-600">
+                <div className="flex items-center justify-between gap-3 text-zinc-600">
                   <span>Desbloqueio de contacto</span>
-                  <span className="font-semibold text-mint">150 MZN</span>
+                  <span className="font-semibold text-mint shrink-0">150 MZN</span>
                 </div>
               </div>
 
               <hr className="border-gray-100" />
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-bold">Total a pagar agora</span>
                 <span className="text-xl font-bold text-mint">150 MZN</span>
               </div>
@@ -173,27 +173,27 @@ export default function Desbloquear({
           </div>
 
           {/* ── Coluna direita: pagamento ── */}
-          <div className="w-[480px] flex-shrink-0 flex flex-col gap-5">
+          <div className="w-full lg:w-[480px] flex-shrink-0 flex flex-col gap-5">
 
             {/* Valor destacado */}
-            <div className="bg-mint/5 rounded-2xl p-5 flex items-center justify-between border border-mint/20">
-              <div className="flex items-center gap-3">
-                <div className="bg-mint/20 rounded-full p-2.5">
+            <div className="bg-mint/5 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-mint/20">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="bg-mint/20 rounded-full p-2.5 shrink-0">
                   <Lock className="size-5 text-black" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="font-bold text-sm">Desbloquear contacto</p>
                   <p className="text-xs text-zinc-500">Acesso imediato · Pagamento único</p>
                 </div>
               </div>
-              <p className="text-3xl font-bold text-mint">150 MZN</p>
+              <p className="text-2xl sm:text-3xl font-bold text-mint shrink-0">150 MZN</p>
             </div>
 
             {/* Método de pagamento */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col gap-5">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 sm:p-6 flex flex-col gap-5">
               <p className="font-bold text-sm">Método de pagamento</p>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 {([
                   { key: "mpesa",  icon: Phone,      label: "M-Pesa" },
                   { key: "cartao", icon: CreditCard, label: "Cartão bancário" },
@@ -207,7 +207,7 @@ export default function Desbloquear({
                         : "border-gray-200 text-zinc-500 hover:border-gray-300"
                     }`}
                   >
-                    <Icon className="size-4" /> {label}
+                    <Icon className="size-4 shrink-0" /> {label}
                   </button>
                 ))}
               </div>
@@ -242,7 +242,7 @@ export default function Desbloquear({
                       className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
                     />
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <div className="flex-1 flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
                         Validade
@@ -255,7 +255,7 @@ export default function Desbloquear({
                         className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
                       />
                     </div>
-                    <div className="w-32 flex flex-col gap-1.5">
+                    <div className="w-full sm:w-32 flex flex-col gap-1.5">
                       <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">
                         CVC
                       </label>

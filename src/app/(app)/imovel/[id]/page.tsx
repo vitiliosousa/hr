@@ -23,11 +23,11 @@ export default async function DetalheImovel({
   const destaque = imoveis.filter((i) => i.id !== imovel.id).slice(0, 4);
 
   return (
-    <div className="w-full flex flex-col pb-24">
-      <div className="max-w-7xl mx-auto w-full px-10">
+    <div className="w-full flex flex-col pb-28 lg:pb-24">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-10">
 
         {/* Topo */}
-        <div className="py-6 flex flex-col gap-4">
+        <div className="py-5 sm:py-6 flex flex-col gap-4">
           <Link
             href="/pesquisa"
             className="flex items-center gap-1 text-sm text-zinc-500 hover:text-black transition w-fit"
@@ -35,8 +35,8 @@ export default async function DetalheImovel({
             <ChevronLeft className="size-4" /> Voltar à pesquisa
           </Link>
 
-          <div className="flex items-start justify-between">
-            <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <div className="flex flex-col gap-1.5 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="bg-mint text-black text-xs font-bold px-3 py-1 rounded-full">
                   {imovel.tipo}
@@ -49,20 +49,51 @@ export default async function DetalheImovel({
                   {imovel.disponivel ? "● Disponível" : "● Alugado"}
                 </span>
               </div>
-              <h1 className="text-2xl font-bold text-blackish">{imovel.titulo}</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-blackish">{imovel.titulo}</h1>
               <p className="text-zinc-500 flex items-center gap-1.5 text-sm">
                 <MapPin className="size-4 flex-shrink-0" />
                 {imovel.localizacao}
               </p>
             </div>
-            <p className="text-xs text-zinc-400 flex-shrink-0">
+            <p className="text-xs text-zinc-400 shrink-0">
               Publicado a {dataFormatada}
             </p>
           </div>
         </div>
 
-        {/* Galeria estilo Airbnb */}
-        <div className="relative grid grid-cols-[2fr_1fr_1fr] grid-rows-2 h-[480px] gap-2 overflow-hidden rounded-2xl">
+        {/* Galeria */}
+        {/* Mobile / tablet: foto principal + miniaturas */}
+        <div className="relative lg:hidden rounded-2xl overflow-hidden">
+          <div className="relative h-[280px] sm:h-[360px]">
+            <Image
+              src={fotos[0]}
+              alt={imovel.titulo}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          {fotos.length > 1 && (
+            <div className="flex gap-1.5 mt-1.5 overflow-x-auto">
+              {fotos.slice(1, 5).map((foto, i) => (
+                <div key={i} className="relative h-20 w-28 sm:h-24 sm:w-36 shrink-0 overflow-hidden rounded-lg">
+                  <Image
+                    src={foto}
+                    alt={`${imovel.titulo} foto ${i + 2}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          <button className="absolute top-3 right-3 bg-white text-black text-xs font-semibold px-3 py-2 rounded-lg shadow-md flex items-center gap-1.5">
+            <Images className="size-3.5" /> Ver fotos
+          </button>
+        </div>
+
+        {/* Desktop: grelha Airbnb */}
+        <div className="relative hidden lg:grid grid-cols-[2fr_1fr_1fr] grid-rows-2 h-[480px] gap-2 overflow-hidden rounded-2xl">
           <div className="row-span-2 relative overflow-hidden">
             <Image
               src={fotos[0]}
@@ -88,14 +119,14 @@ export default async function DetalheImovel({
         </div>
 
         {/* Pills de especificações rápidas */}
-        <div className="flex items-center gap-3 mt-6 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-3 mt-5 sm:mt-6 flex-wrap">
           {[
             { icon: Square,   val: `${imovel.area} m²`,                              label: "Área" },
             { icon: BedDouble, val: imovel.quartos > 0 ? `${imovel.quartos} quartos` : "Estúdio", label: "Quartos" },
             { icon: Bath,     val: `${imovel.casasBanho} WC`,                        label: "Casas de banho" },
             ...(imovel.andar > 0 ? [{ icon: Layers, val: `${imovel.andar}º andar`, label: "Piso" }] : []),
           ].map(({ icon: Icon, val }) => (
-            <div key={val} className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm">
+            <div key={val} className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold shadow-sm">
               <Icon className="size-4 text-mint" />
               {val}
             </div>
@@ -103,10 +134,10 @@ export default async function DetalheImovel({
         </div>
 
         {/* Conteúdo + Sidebar */}
-        <div className="flex gap-10 mt-8">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 mt-6 sm:mt-8">
 
           {/* Coluna principal */}
-          <div className="flex-1 flex flex-col gap-10 min-w-0">
+          <div className="flex-1 flex flex-col gap-8 sm:gap-10 min-w-0">
 
             {/* Descrição */}
             <section>
@@ -119,7 +150,7 @@ export default async function DetalheImovel({
             {/* Detalhes */}
             <section>
               <h2 className="font-bold text-lg mb-5">Detalhes</h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {[
                   { label: "Tipo de imóvel",   val: imovel.tipo },
                   { label: "Área total",        val: `${imovel.area} m²` },
@@ -128,9 +159,9 @@ export default async function DetalheImovel({
                   { label: "Piso",              val: imovel.andar > 0 ? `${imovel.andar}º andar` : "Rés-do-chão" },
                   { label: "Localização",       val: imovel.localizacao },
                 ].map(({ label, val }) => (
-                  <div key={label} className="bg-gray-50 rounded-xl p-4 flex flex-col gap-1">
+                  <div key={label} className="bg-gray-50 rounded-xl p-3 sm:p-4 flex flex-col gap-1 min-w-0">
                     <p className="text-xs text-zinc-400 font-medium">{label}</p>
-                    <p className="text-sm font-semibold text-zinc-900">{val}</p>
+                    <p className="text-sm font-semibold text-zinc-900 break-words">{val}</p>
                   </div>
                 ))}
               </div>
@@ -141,7 +172,7 @@ export default async function DetalheImovel({
             {/* Comodidades */}
             <section>
               <h2 className="font-bold text-lg mb-5">Comodidades</h2>
-              <div className="grid grid-cols-3 gap-y-3 gap-x-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 gap-x-4">
                 {imovel.amenidades.map((am) => (
                   <div key={am} className="flex items-center gap-2.5 text-sm text-zinc-700">
                     <div className="w-5 h-5 rounded-full bg-mint/15 flex items-center justify-center flex-shrink-0">
@@ -159,12 +190,12 @@ export default async function DetalheImovel({
             <section>
               <h2 className="font-bold text-lg mb-5">Disponibilidade</h2>
               <div className="flex items-center gap-4">
-                <div className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold ${
+                <div className={`flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-xl text-sm font-semibold ${
                   imovel.disponivel
                     ? "bg-green-50 text-green-700 border border-green-200"
                     : "bg-red-50 text-red-600 border border-red-200"
                 }`}>
-                  <Calendar className="size-4" />
+                  <Calendar className="size-4 shrink-0" />
                   {imovel.disponivel ? "Disponível imediatamente" : "Actualmente alugado"}
                 </div>
               </div>
@@ -175,7 +206,7 @@ export default async function DetalheImovel({
             {/* Localização */}
             <section>
               <h2 className="font-bold text-lg mb-4">Localização</h2>
-              <div className="bg-gray-100 rounded-2xl h-52 flex flex-col items-center justify-center gap-2 text-zinc-400">
+              <div className="bg-gray-100 rounded-2xl h-44 sm:h-52 flex flex-col items-center justify-center gap-2 text-zinc-400 px-4 text-center">
                 <MapPin className="size-6" />
                 <p className="text-sm font-medium">{imovel.localizacao}</p>
                 <p className="text-xs">Mapa em breve</p>
@@ -183,14 +214,14 @@ export default async function DetalheImovel({
             </section>
           </div>
 
-          {/* Sidebar */}
-          <div className="w-[340px] flex-shrink-0 flex flex-col gap-3 self-start sticky top-24">
-            <div className="bg-white shadow-lg rounded-2xl p-6 flex flex-col gap-5 border border-gray-100">
+          {/* Sidebar — desktop sticky; mobile no fluxo */}
+          <div className="w-full lg:w-[340px] flex-shrink-0 flex flex-col gap-3 lg:self-start lg:sticky lg:top-24">
+            <div className="bg-white shadow-lg rounded-2xl p-5 sm:p-6 flex flex-col gap-5 border border-gray-100">
 
               {/* Preço */}
               <div>
                 <p className="text-xs text-zinc-400 mb-0.5 font-medium">Preço mensal</p>
-                <p className="text-mint text-3xl font-bold">
+                <p className="text-mint text-2xl sm:text-3xl font-bold">
                   {imovel.preco.toLocaleString("pt-PT")}
                   <span className="text-sm font-normal text-zinc-400"> MZN/mês</span>
                 </p>
@@ -244,14 +275,14 @@ export default async function DetalheImovel({
                 </div>
               </div>
 
-              {/* CTA */}
-              <Link href={`/imovel/${imovel.id}/desbloquear`}>
+              {/* CTA — escondido no mobile (barra fixa em baixo) */}
+              <Link href={`/imovel/${imovel.id}/desbloquear`} className="hidden lg:block">
                 <button className="w-full bg-mint text-black font-bold text-sm py-3.5 rounded-xl hover:bg-mint/80 transition duration-200 hover:cursor-pointer">
                   Desbloquear contacto — 150 MZN
                 </button>
               </Link>
 
-              <p className="text-xs text-zinc-400 text-center leading-relaxed -mt-2">
+              <p className="hidden lg:block text-xs text-zinc-400 text-center leading-relaxed -mt-2">
                 Pagamento único. Acesso imediato ao contacto directo do proprietário.
               </p>
             </div>
@@ -264,21 +295,35 @@ export default async function DetalheImovel({
       </div>
 
       {/* Imóveis em destaque */}
-      <div className="max-w-7xl mx-auto w-full px-10 mt-16">
-        <div className="flex items-center justify-between mb-6">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-10 mt-12 sm:mt-16">
+        <div className="flex items-end justify-between mb-6 gap-4">
           <div>
             <p className="text-xs font-semibold text-mint uppercase tracking-widest mb-1">Poderá gostar</p>
-            <h2 className="text-xl font-bold">Imóveis em destaque</h2>
+            <h2 className="text-lg sm:text-xl font-bold">Imóveis em destaque</h2>
           </div>
-          <Link href="/pesquisa" className="text-sm font-semibold text-mint hover:underline">
+          <Link href="/pesquisa" className="text-sm font-semibold text-mint hover:underline shrink-0">
             Ver todos →
           </Link>
         </div>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {destaque.map((im) => (
             <ImovelCard key={im.id} imovel={im} />
           ))}
         </div>
+      </div>
+
+      {/* Barra CTA fixa no mobile */}
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-100 px-4 py-3 flex items-center justify-between gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <div className="min-w-0">
+          <p className="text-mint font-bold text-base truncate">
+            {imovel.preco.toLocaleString("pt-PT")} <span className="text-xs font-normal text-zinc-400">MZN/mês</span>
+          </p>
+        </div>
+        <Link href={`/imovel/${imovel.id}/desbloquear`} className="shrink-0">
+          <button className="bg-mint text-black font-bold text-xs sm:text-sm px-4 py-3 rounded-xl hover:bg-mint/80 transition hover:cursor-pointer whitespace-nowrap">
+            Desbloquear — 150 MZN
+          </button>
+        </Link>
       </div>
     </div>
   );
