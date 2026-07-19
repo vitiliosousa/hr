@@ -50,7 +50,7 @@ export default function Desbloquear({
               { icon: Mail,  label: "Email",     val: "proprietario@gmail.com" },
             ].map(({ icon: Icon, label, val }) => (
               <div key={label} className="flex items-center gap-3 bg-gray-50 rounded-xl p-3.5">
-                <div className="w-9 h-9 rounded-full bg-mint/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 rounded-full bg-mint/10 flex items-center justify-center shrink-0">
                   <Icon className="size-4 text-mint" />
                 </div>
                 <div className="text-left min-w-0">
@@ -106,7 +106,7 @@ export default function Desbloquear({
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
                 <span className="absolute bottom-3 left-3 bg-mint text-black text-xs font-bold px-2.5 py-1 rounded-full">
                   {imovel.tipo}
                 </span>
@@ -162,7 +162,7 @@ export default function Desbloquear({
                 { icon: CheckCircle, texto: "Se não receberes resposta, reembolsamos na totalidade" },
               ].map(({ icon: Icon, texto }) => (
                 <div key={texto} className="flex items-start gap-3 text-xs text-zinc-500">
-                  <Icon className="size-4 text-mint flex-shrink-0 mt-0.5" />
+                  <Icon className="size-4 text-mint shrink-0 mt-0.5" />
                   {texto}
                 </div>
               ))}
@@ -170,7 +170,7 @@ export default function Desbloquear({
           </div>
 
           {/* ── Coluna direita: pagamento ── */}
-          <div className="w-full lg:w-[480px] flex-shrink-0 flex flex-col gap-5">
+          <div className="w-full lg:w-[480px] shrink-0 flex flex-col gap-5">
 
             {/* Valor destacado */}
             <div className="bg-mint/5 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-mint/20">
@@ -218,7 +218,7 @@ export default function Desbloquear({
                   placeholder="84 123 456"
                   value={telefone}
                   onChange={(e) => setTelefone(e.target.value)}
-                  className="w-full h-12 border border-gray-200 rounded-xl px-4 text-sm outline-none focus:border-black transition"
+                  className="w-full h-12 border rounded-xl px-4 text-sm outline-none focus:border-black transition"
                 />
                 <p className="text-xs text-zinc-400">
                   Receberás um pedido de confirmação no teu telemóvel
