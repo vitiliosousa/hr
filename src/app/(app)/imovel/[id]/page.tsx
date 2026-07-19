@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
 import ImovelCard from "@/components/ImovelCard";
+import ShareButton from "@/components/imovel/ShareButton";
+import ReportModal from "@/components/imovel/ReportModal";
 
 export default async function DetalheImovel({
   params,
@@ -55,9 +57,10 @@ export default async function DetalheImovel({
                 {imovel.localizacao}
               </p>
             </div>
-            <p className="text-xs text-zinc-400 shrink-0">
-              Publicado a {dataFormatada}
-            </p>
+            <div className="flex items-center gap-2 shrink-0">
+              <p className="text-xs text-zinc-400">Publicado a {dataFormatada}</p>
+              <ShareButton titulo={imovel.titulo} id={imovel.id} />
+            </div>
           </div>
         </div>
 
@@ -287,9 +290,9 @@ export default async function DetalheImovel({
               </p>
             </div>
 
-            <button className="text-xs text-zinc-400 hover:text-zinc-600 text-center hover:underline hover:cursor-pointer transition">
-              Reportar este anúncio
-            </button>
+            <div className="flex justify-center">
+              <ReportModal />
+            </div>
           </div>
         </div>
       </div>

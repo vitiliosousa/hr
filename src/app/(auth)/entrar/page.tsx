@@ -1,9 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import { FloatingLabelInput } from "@/components/FloatingLabelInput";
 import { FloatingLabelPasswordInput } from "@/components/FloatingLabelPasswordInput";
 import SocialMedia from "@/components/SocialMedia";
+import { useRouter } from "next/navigation";
 
 export default function Entrar() {
+  const router = useRouter();
+
+  const entrar = () => {
+    router.push("/meus-imoveis");
+  };
+
   return (
     <div className="flex flex-col w-full gap-3">
       <h1 className="text-2xl sm:text-3xl font-semibold">Entrar</h1>
@@ -24,7 +33,8 @@ export default function Entrar() {
         </div>
         <div className="flex flex-col items-center gap-4 w-full">
           <button
-            type="submit"
+            type="button"
+            onClick={entrar}
             className="bg-mint text-black text-xs font-semibold h-11 px-4 rounded-xl w-full hover:bg-mint/80 hover:cursor-pointer transition"
           >
             Entrar

@@ -10,7 +10,7 @@ export default function Registar() {
   const router = useRouter();
 
   const next = () => {
-    router.push("/registar/metodo-pagamento");
+    router.push("/meus-imoveis");
   };
 
   return (

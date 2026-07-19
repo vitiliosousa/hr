@@ -10,7 +10,7 @@ export default function MetodoPagamento() {
   const router = useRouter();
 
   const concluir = () => {
-    router.push("/entrar");
+    router.push("/meus-imoveis");
   };
 
   return (

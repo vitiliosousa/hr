@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Home, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -30,7 +31,7 @@ export default function Header() {
       <div className="relative max-w-7xl mx-auto w-full px-4 sm:px-10 h-16 flex items-center justify-between gap-4">
 
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setOpen(false)}>
-          <Home className="size-5 text-mint" />
+          <Image src="/casaja.svg" alt="CasaJá" width={28} height={28} />
           <span className="font-bold text-base tracking-tight text-blackish">CasaJá</span>
         </Link>
 
