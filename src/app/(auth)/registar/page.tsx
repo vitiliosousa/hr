@@ -10,6 +10,7 @@ export default function Registar() {
   const router = useRouter();
 
   const next = () => {
+    localStorage.setItem("casaja_auth", "true");
     router.push("/meus-imoveis");
   };
 

@@ -1,13 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   BedDouble, Bath, Square, MapPin, Lock, ChevronLeft,
-  Check, Images, Layers, Calendar,
+  Check, Layers, Calendar,
 } from "lucide-react";
 import { imoveis } from "@/data/imoveis";
 import ImovelCard from "@/components/ImovelCard";
 import ShareButton from "@/components/imovel/ShareButton";
 import ReportModal from "@/components/imovel/ReportModal";
+import PhotoGallery from "@/components/imovel/PhotoGallery";
 
 export default async function DetalheImovel({
   params,
@@ -65,61 +65,7 @@ export default async function DetalheImovel({
         </div>
 
         {/* Galeria */}
-        {/* Mobile / tablet: foto principal + miniaturas */}
-        <div className="relative lg:hidden rounded-2xl overflow-hidden">
-          <div className="relative h-[280px] sm:h-[360px]">
-            <Image
-              src={fotos[0]}
-              alt={imovel.titulo}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          {fotos.length > 1 && (
-            <div className="flex gap-1.5 mt-1.5 overflow-x-auto">
-              {fotos.slice(1, 5).map((foto, i) => (
-                <div key={i} className="relative h-20 w-28 sm:h-24 sm:w-36 shrink-0 overflow-hidden rounded-lg">
-                  <Image
-                    src={foto}
-                    alt={`${imovel.titulo} foto ${i + 2}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-          <button className="absolute top-3 right-3 bg-white text-black text-xs font-semibold px-3 py-2 rounded-lg shadow-md flex items-center gap-1.5">
-            <Images className="size-3.5" /> Ver fotos
-          </button>
-        </div>
-
-        {/* Desktop: grelha Airbnb */}
-        <div className="relative hidden lg:grid grid-cols-[2fr_1fr_1fr] grid-rows-2 h-[480px] gap-2 overflow-hidden rounded-2xl">
-          <div className="row-span-2 relative overflow-hidden">
-            <Image
-              src={fotos[0]}
-              alt={imovel.titulo}
-              fill
-              className="object-cover hover:scale-105 transition duration-500"
-              priority
-            />
-          </div>
-          {fotos.slice(1, 5).map((foto, i) => (
-            <div key={i} className="relative overflow-hidden">
-              <Image
-                src={foto}
-                alt={`${imovel.titulo} foto ${i + 2}`}
-                fill
-                className="object-cover hover:scale-105 transition duration-500"
-              />
-            </div>
-          ))}
-          <button className="absolute bottom-4 right-4 bg-white text-black text-xs font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-gray-50 transition hover:cursor-pointer flex items-center gap-2">
-            <Images className="size-4" /> Ver todas as fotos
-          </button>
-        </div>
+        <PhotoGallery fotos={fotos} titulo={imovel.titulo} />
 
         {/* Pills de especificações rápidas */}
         <div className="flex items-center gap-2 sm:gap-3 mt-5 sm:mt-6 flex-wrap">

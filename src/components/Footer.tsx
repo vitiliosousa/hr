@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { Home, Instagram, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
+import { Instagram, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
 
 const links = {
   arrendatarios: [
-    { label: "Pesquisar imóveis", href: "/pesquisa" },
-    { label: "Como funciona", href: "/#como-funciona" },
+    { label: "Pesquisar imóveis",  href: "/pesquisa" },
+    { label: "Como funciona",      href: "/como-funciona" },
+    { label: "Perguntas frequentes", href: "/faq" },
     { label: "Os meus favoritos", href: "/favoritos" },
-    { label: "Criar conta", href: "/registar" },
   ],
   proprietarios: [
-    { label: "Publicar imóvel", href: "/publicar" },
-    { label: "Os meus anúncios", href: "/meus-imoveis" },
-    { label: "Dicas para proprietários", href: "#" },
-    { label: "Preços e planos", href: "#" },
+    { label: "Publicar imóvel",    href: "/publicar" },
+    { label: "Os meus anúncios",  href: "/meus-imoveis" },
+    { label: "Os meus contactos", href: "/meus-contactos" },
   ],
   empresa: [
-    { label: "Sobre nós", href: "#" },
-    { label: "Contacto", href: "#" },
+    { label: "Contacto",               href: "/contacto" },
+    { label: "Como funciona",          href: "/como-funciona" },
     { label: "Política de privacidade", href: "#" },
-    { label: "Termos de utilização", href: "#" },
+    { label: "Termos de utilização",   href: "#" },
   ],
 };
 
@@ -62,7 +62,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 w-fit">
-              <Home className="size-5 text-mint" />
+              <Image src="/casaja.svg" alt="CasaJá" width={28} height={28} />
               <span className="font-bold text-lg">CasaJá</span>
             </Link>
             <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">

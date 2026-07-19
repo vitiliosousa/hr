@@ -10,6 +10,7 @@ export default function Entrar() {
   const router = useRouter();
 
   const entrar = () => {
+    localStorage.setItem("casaja_auth", "true");
     router.push("/meus-imoveis");
   };
 

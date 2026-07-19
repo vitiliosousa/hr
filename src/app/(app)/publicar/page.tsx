@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import {
   Check, ChevronRight, ChevronLeft, Camera, MapPin, CheckCircle2,
+  X, Star,
 } from "lucide-react";
 
 /* ─────────────────────────── Constantes ─────────────────────────── */
@@ -78,7 +79,7 @@ function FInput({
   onChange: (v: string) => void; type?: string; placeholder?: string; hint?: string;
 }) {
   const [focus, setFocus] = useState(false);
-  const up = focus || !!value;
+  const up = focus || !!value || type === "date";
   return (
     <div className="flex flex-col gap-1">
       <div className="relative">
@@ -188,6 +189,25 @@ export default function Publicar() {
   const [passo, setPasso] = useState(1);
   const [publicado, setPublicado] = useState(false);
   const [d, setD] = useState<Dados>(init);
+  const [fotos, setFotos] = useState<{ file: File; url: string }[]>([]);
+  const [capaIdx, setCapaIdx] = useState(0);
+  const [drag, setDrag] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const adicionarFotos = useCallback((files: FileList | null) => {
+    if (!files) return;
+    const novas = Array.from(files)
+      .filter((f) => f.type.startsWith("image/"))
+      .slice(0, 20 - fotos.length)
+      .map((f) => ({ file: f, url: URL.createObjectURL(f) }));
+    setFotos((prev) => [...prev, ...novas]);
+  }, [fotos.length]);
+
+  const removerFoto = (i: number) => {
+    URL.revokeObjectURL(fotos[i].url);
+    setFotos((prev) => prev.filter((_, idx) => idx !== i));
+    setCapaIdx((prev) => (prev >= i && prev > 0 ? prev - 1 : prev));
+  };
 
   const set = <K extends keyof Dados>(k: K, v: Dados[K]) => setD((prev) => ({ ...prev, [k]: v }));
 
@@ -356,12 +376,6 @@ export default function Publicar() {
                   options={[{ value: "MZN", label: "MZN" }, { value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }]} />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FInput label="Valor da caução" type="number" value={d.caucao} onChange={(v) => set("caucao", v)} />
-                <FSelect label="Meses de caução" value={d.mesesCaucao} onChange={(v) => set("mesesCaucao", v)}
-                  options={["0", "1", "2", "3", "6"].map((m) => ({ value: m, label: `${m} ${m === "1" ? "mês" : "meses"}` }))} />
-              </div>
-
               <div className="flex flex-col gap-3 p-4 bg-gray-50 rounded-xl">
                 <Toggle value={d.negociavel} onChange={(v) => set("negociavel", v)} label="Valor negociável" />
               </div>
@@ -423,30 +437,120 @@ export default function Publicar() {
             <>
               <div className="-mb-2">
                 <h2 className="font-semibold text-lg">Fotografias</h2>
-                <p className="text-sm text-zinc-400 mt-1">Mínimo 3 fotos <span className="text-mint">*</span> · Máximo 20 fotos</p>
+                <p className="text-sm text-zinc-400 mt-1">
+                  Mínimo 3 fotos <span className="text-mint">*</span> · Máximo 20 fotos
+                  {fotos.length > 0 && <span className="ml-2 font-medium text-mint">{fotos.length} adicionada{fotos.length !== 1 ? "s" : ""}</span>}
+                </p>
               </div>
 
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-12 flex flex-col items-center gap-4 text-center hover:border-mint transition hover:cursor-pointer">
-                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gray-100 flex items-center justify-center">
-                  <Camera className="size-7 sm:size-8 text-zinc-300" />
+              {/* Input file oculto */}
+              <input
+                ref={inputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => adicionarFotos(e.target.files)}
+              />
+
+              {/* Drop zone */}
+              <div
+                onClick={() => inputRef.current?.click()}
+                onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+                onDragLeave={() => setDrag(false)}
+                onDrop={(e) => { e.preventDefault(); setDrag(false); adicionarFotos(e.dataTransfer.files); }}
+                className={`border-2 border-dashed rounded-xl p-6 sm:p-10 flex flex-col items-center gap-4 text-center transition hover:cursor-pointer ${
+                  drag ? "border-mint bg-mint/5" : "border-gray-200 hover:border-mint hover:bg-gray-50"
+                }`}
+              >
+                <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center">
+                  <Camera className={`size-7 transition ${drag ? "text-mint" : "text-zinc-300"}`} />
                 </div>
                 <div>
-                  <p className="font-semibold text-sm text-zinc-600">Adicionar fotografias</p>
+                  <p className="font-semibold text-sm text-zinc-600">
+                    {drag ? "Soltar para adicionar" : "Adicionar fotografias"}
+                  </p>
                   <p className="text-xs text-zinc-400 mt-1">Arrasta aqui ou clica para seleccionar</p>
                   <p className="text-xs text-zinc-300 mt-0.5">JPG, PNG, WEBP · Máx. 10 MB por foto</p>
                 </div>
-                <button type="button" className="text-xs bg-gray-100 px-5 py-2 rounded-lg hover:bg-gray-200 transition hover:cursor-pointer font-medium">
+                <span className="text-xs bg-gray-100 px-5 py-2 rounded-lg font-medium hover:bg-gray-200 transition">
                   Seleccionar ficheiros
-                </button>
+                </span>
               </div>
 
-              <div className="bg-mint/5 border border-mint/20 rounded-xl p-5 flex flex-col gap-2 text-sm text-zinc-600">
+              {/* Grelha de previews */}
+              {fotos.length > 0 && (
+                <div>
+                  <p className="text-xs text-zinc-400 mb-3">
+                    Clica em <Star className="size-3 inline mb-0.5" /> para definir a foto de capa · Clica em <X className="size-3 inline mb-0.5" /> para remover
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {fotos.map(({ url }, i) => (
+                      <div key={url} className="relative group rounded-xl overflow-hidden aspect-square">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={url} alt={`foto ${i + 1}`} className="w-full h-full object-cover" />
+
+                        {/* Overlay — só no desktop ao hover */}
+                        <div className="absolute inset-0 bg-black/0 md:group-hover:bg-black/30 transition duration-200" />
+
+                        {/* Badge capa */}
+                        {i === capaIdx && (
+                          <div className="absolute top-2 left-2 bg-mint text-black text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <Star className="size-2.5 fill-black" /> Capa
+                          </div>
+                        )}
+
+                        {/* Botão definir capa — sempre visível no mobile, hover no desktop */}
+                        {i !== capaIdx && (
+                          <button
+                            type="button"
+                            onClick={() => setCapaIdx(i)}
+                            title="Definir como capa"
+                            className="absolute top-2 left-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition bg-white/90 hover:bg-mint p-1.5 rounded-full hover:cursor-pointer"
+                          >
+                            <Star className="size-3 text-zinc-600" />
+                          </button>
+                        )}
+
+                        {/* Botão remover — sempre visível no mobile, hover no desktop */}
+                        <button
+                          type="button"
+                          onClick={() => removerFoto(i)}
+                          title="Remover foto"
+                          className="absolute top-2 right-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition bg-white/90 hover:bg-red-500 p-1.5 rounded-full hover:cursor-pointer"
+                        >
+                          <X className="size-3 text-zinc-600" />
+                        </button>
+
+                        {/* Número */}
+                        <div className="absolute bottom-2 right-2 bg-black/50 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                          {i + 1}
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Botão adicionar mais */}
+                    {fotos.length < 20 && (
+                      <button
+                        type="button"
+                        onClick={() => inputRef.current?.click()}
+                        className="aspect-square rounded-xl border-2 border-dashed border-gray-200 hover:border-mint hover:bg-gray-50 flex flex-col items-center justify-center gap-2 text-zinc-400 hover:text-mint transition hover:cursor-pointer"
+                      >
+                        <Camera className="size-6" />
+                        <span className="text-xs font-medium">Adicionar</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-mint/5 border border-mint/20 rounded-xl p-5 flex flex-col gap-2">
                 <p className="font-semibold text-black text-sm">Dicas para boas fotografias</p>
-                <ul className="space-y-1 text-xs">
+                <ul className="space-y-1 text-xs text-zinc-600">
                   <li>✓ Usa luz natural — abre as janelas antes de fotografar</li>
                   <li>✓ Fotografa todos os compartimentos: sala, quartos, cozinha, WC</li>
                   <li>✓ Inclui o exterior e a zona envolvente do imóvel</li>
-                  <li>✓ A primeira foto será a imagem de capa do anúncio</li>
+                  <li>✓ A foto de capa é a primeira que os interessados vêem</li>
                   <li>✓ Fotos de qualidade aumentam em 3× as visitas ao anúncio</li>
                 </ul>
               </div>
@@ -582,7 +686,6 @@ export default function Publicar() {
                   t: "Preço",
                   rows: [
                     ["Valor mensal", d.preco ? `${Number(d.preco).toLocaleString("pt-PT")} ${d.moeda}/mês` : ""],
-                    ["Caução", d.caucao ? `${d.caucao} ${d.moeda} (${d.mesesCaucao} mês/meses)` : "Sem caução"],
                     ["Negociável", d.negociavel ? "Sim" : "Não"],
                     ["Despesas incluídas", d.despesas.length ? d.despesas.join(", ") : "Nenhuma"],
                   ],

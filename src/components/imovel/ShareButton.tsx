@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Share2, Copy, CheckCheck, MessageCircle, Facebook } from "lucide-react";
+import { Share2, Copy, CheckCheck, MessageCircle, Facebook, Instagram } from "lucide-react";
 
 export default function ShareButton({ titulo, id }: { titulo: string; id: string }) {
   const [open, setOpen] = useState(false);
@@ -45,10 +45,10 @@ export default function ShareButton({ titulo, id }: { titulo: string; id: string
       classes: "text-blue-600",
     },
     {
-      label: "Telegram",
-      Icon: Share2,
-      onClick: () => window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(texto)}`),
-      classes: "text-sky-500",
+      label: "Instagram",
+      Icon: Instagram,
+      onClick: () => window.open(`https://www.instagram.com/`),
+      classes: "text-pink-500",
     },
   ];
 
